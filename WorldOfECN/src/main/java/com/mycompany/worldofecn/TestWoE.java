@@ -34,9 +34,15 @@ public class TestWoE {
         System.out.println("Position de Robin ------ x: " + monMonde.robin.getPos().getX() + ", Y: "+ monMonde.robin.getPos().getY());
         System.out.println("Position de GuillaumeT ------ x: " + monMonde.guillaumeT.getPos().getX() + ", Y: "+ monMonde.guillaumeT.getPos().getY());
         
-        
+        //Tests avec la nouvelle classe Creature
         monMonde.robin.affiche();
         monMonde.bugs.affiche();
+        
+        //Tests avec la nouvelle classe Loup
+        Loup lulu = new Loup();
+        System.out.print("Loup lulu: ");
+        lulu.affiche();
+       
 
     } 
 }
