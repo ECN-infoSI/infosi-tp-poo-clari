@@ -12,12 +12,7 @@ public class TestWoE {
     public static void main(String[] args) {
         World monMonde = new World();
         monMonde.creerMondeAlea();
-        monMonde.afficheMonde();
-        
-        System.out.println(monMonde.peon);
-        System.out.println(monMonde.bugs);
-        System.out.println(monMonde.robin);
-        
+                        
         //Test setters
         monMonde.peon.setPtVie(10);
         monMonde.peon.setNom("Peon");
@@ -27,27 +22,18 @@ public class TestWoE {
         
         monMonde.bugs.setPtPar(5);
         
-        //Test getters
-        System.out.println(monMonde.peon.getNom());
-        System.out.println(monMonde.peon.getPtVie());
-        
-        monMonde.robin.affiche();
-        
-        monMonde.bugs.getPos().affiche();
-        
-        //Test deplace
-        monMonde.bugs.deplace();
-        monMonde.bugs.affiche();
-        monMonde.bugs.getPos().affiche();
-        
-        //Afficher le monde apres un deplacement
         monMonde.afficheMonde();
-        System.out.println("Allons-y! Déplacez-vous!");
-        monMonde.bugs.deplace();
+        System.out.println("Position de Robin ------ x: " + monMonde.robin.getPos().getX() + ", Y: "+ monMonde.robin.getPos().getY());
+        System.out.println("Position de GuillaumeT ------ x: " + monMonde.guillaumeT.getPos().getX() + ", Y: "+ monMonde.guillaumeT.getPos().getY());
+
+        //Afficher le monde apres un deplacement
+        System.out.println("Allez-y! Déplacez-vous!");
         monMonde.robin.deplace();
-        monMonde.peon.deplace();
         monMonde.afficheMonde();
 
-    }
-    
+        System.out.println("Position de Robin ------ x: " + monMonde.robin.getPos().getX() + ", Y: "+ monMonde.robin.getPos().getY());
+        System.out.println("Position de GuillaumeT ------ x: " + monMonde.guillaumeT.getPos().getX() + ", Y: "+ monMonde.guillaumeT.getPos().getY());
+
+
+    } 
 }

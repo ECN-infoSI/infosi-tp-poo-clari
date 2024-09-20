@@ -1,12 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.worldofecn;
 
 /**
  *
- * @author Clara
+ * @author Clara 
  */
 public class Archer extends Personnage {
     private int nbFleches;
@@ -16,7 +12,7 @@ public class Archer extends Personnage {
        this.nbFleches = 0;
     }
     public Archer (Archer A) {
-       this(A.getNom(), A.getPtVie(), A.getDegAtt(), A.getPtPar(), A.getPageAtt(), A.getPagePar(), A.getDistAttMax(), A.getPos(), A.getNbFleches(), A.getMonde());
+       this(A.getNom(), A.getPtVie(), A.getDegAtt(), A.getPtPar(), A.getPageAtt(), A.getPagePar(), A.getDistAttMax(), new Point2D(A.getPos()), A.getNbFleches(), A.getMonde());
     }
     
     public Archer() {

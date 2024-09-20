@@ -13,6 +13,7 @@ public class World {
     public Archer robin;
     public Paysan peon;
     public Lapin bugs;
+    public Archer guillaumeT;
     public char[][] monde;
     
     //methodes
@@ -74,6 +75,8 @@ public class World {
         
         monde[entierAleaX][entierAleaY] = 'L';
 
+        guillaumeT = new Archer(robin);
+        
     }
 
     public char[][] getMonde() {
