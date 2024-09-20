@@ -5,7 +5,7 @@
 package com.mycompany.worldofecn;
 
 /**
- *
+ * test
  * @author Clara
  */
 public class WorldOfECN {
