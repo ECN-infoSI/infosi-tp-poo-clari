@@ -93,6 +93,7 @@ public class Monstre {
         pos.translate(1,1);
     }
     
+    @Override
     public String toString() {
         return "Monstre{" + "ptVie=" + ptVie + ", degAtt=" + degAtt + ", ptPar=" + ptPar + ", pageAtt=" + pageAtt + ", pagePar=" + pagePar + ", pos=" + pos + '}';
     }
