@@ -4,6 +4,8 @@
  */
 package com.mycompany.worldofecn;
 
+import java.util.Random;
+
 /**
  *
  * @author User
@@ -15,28 +17,25 @@ public class Monstre {
     private int pageAtt;
     private int pagePar;
     private Point2D pos;
+    private World monde;
     
     //Methodes
-    public Monstre(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p){
-        ptVie = pV;
-        degAtt = dA;
-        ptPar = pPar;
-        pageAtt = paAtt;
-        pagePar = paPar;
-        pos = p;
+    public Monstre(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p, World monde){
+        this.ptVie = pV;
+        this.degAtt = dA;
+        this.ptPar = pPar;
+        this.pageAtt = paAtt;
+        this.pagePar = paPar;
+        this.pos = p;
+        this.monde = monde;
     }
     
     public Monstre(Monstre m){
-        this(m.getPtVie(), m.getDegAtt(), m.getPtPar(), m.getPageAtt(), m.getPagePar(), m.getPos());
+        this(m.getPtVie(), m.getDegAtt(), m.getPtPar(), m.getPageAtt(), m.getPagePar(), m.getPos(), m.getMonde());
     }
     
     public Monstre(){
-        ptVie = 0;
-        degAtt = 0;
-        ptPar = 0;
-        pageAtt = 0;
-        pagePar = 0;
-        pos = null;
+        this(0,0,0,0,0,null,null);
     }
     
     //Getters et setters
@@ -88,10 +87,31 @@ public class Monstre {
         this.pos = pos;
     }
     
+    public World getMonde() {
+        return monde;
+    }
+
+    public void setMonde(World monde) {
+        this.monde = monde;
+    }
+    
    //Autres fonctions
     public void deplace(){
-        pos.translate(1,1);
-    }
+        Random randomise = new Random();
+        int mouvement = randomise.nextInt(8);
+        monde.monde[pos.getX()][pos.getY()]= '0';
+        switch (mouvement) {
+            case 0 -> pos.translate(0, 1);
+            case 1 -> pos.translate(0, -1);
+            case 2 -> pos.translate(1, 0);
+            case 3 -> pos.translate(-1, 0);
+            case 4 -> pos.translate(1, 1);
+            case 5 -> pos.translate(1, -1);
+            case 6 -> pos.translate(-1, 1);
+            case 7 -> pos.translate(-1, -1);
+            default -> pos.translate(0,0);
+        }  
+}
     
     @Override
     public String toString() {
@@ -102,4 +122,5 @@ public class Monstre {
         System.out.println(toString());
     }
 
+    
 }

@@ -42,7 +42,12 @@ public class TestWoE {
         
         //Afficher le monde apres un deplacement
         monMonde.afficheMonde();
-  
+        System.out.println("Allons-y! Déplacez-vous!");
+        monMonde.bugs.deplace();
+        monMonde.robin.deplace();
+        monMonde.peon.deplace();
+        monMonde.afficheMonde();
+
     }
     
 }

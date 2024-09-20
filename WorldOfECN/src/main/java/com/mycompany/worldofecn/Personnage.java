@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.worldofecn;
+import java.util.Random;
 
 /**
  *
@@ -17,8 +18,10 @@ public class Personnage {
     private int pagePar;
     private int distAttMax;
     private Point2D pos;
+    private World monde;
+
     
-    public Personnage (String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p){
+    public Personnage (String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p, World monde){
         this.nom = n;
         this.ptVie = pV;
         this.degAtt = dA;
@@ -27,10 +30,11 @@ public class Personnage {
         this.pagePar = paPar;
         this.distAttMax = dMax;
         this.pos = p;
+        this.monde = monde;
     }
     
     public Personnage (Personnage p) {
-       this(p.getNom(), p.getPtVie(), p.getDegAtt(), p.getPtPar(), p.getPageAtt(), p.getPagePar(), p.getDistAttMax(), p.getPos());
+       this(p.getNom(), p.getPtVie(), p.getDegAtt(), p.getPtPar(), p.getPageAtt(), p.getPagePar(), p.getDistAttMax(), p.getPos(), p.getMonde());
     }
 
     public String getNom() {
@@ -38,7 +42,7 @@ public class Personnage {
     }
     
     public Personnage () {
-        this("",0,0,0,0,0,0,null);
+        this("",0,0,0,0,0,0,null, null);
     }
     
     public void setNom(String nom) {
@@ -53,6 +57,14 @@ public class Personnage {
         this.ptVie = ptVie;
     }
 
+    public World getMonde() {
+        return monde;
+    }
+
+    public void setMonde(World monde) {
+        this.monde = monde;
+    }
+    
     public int getDegAtt() {
         return degAtt;
     }
@@ -102,8 +114,21 @@ public class Personnage {
     }
     
     public void deplace(){
-        pos.translate(1, 1);
-    }
+        Random randomise = new Random();
+        int mouvement = randomise.nextInt(8);
+        monde.monde[pos.getX()][pos.getY()]= '0';
+        switch (mouvement) {
+            case 0 -> pos.translate(0, 1);
+            case 1 -> pos.translate(0, -1);
+            case 2 -> pos.translate(1, 0);
+            case 3 -> pos.translate(-1, 0);
+            case 4 -> pos.translate(1, 1);
+            case 5 -> pos.translate(1, -1);
+            case 6 -> pos.translate(-1, 1);
+            case 7 -> pos.translate(-1, -1);
+            default -> pos.translate(0,0);
+        }           
+}
 
     @Override
     public String toString() {

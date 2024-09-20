@@ -10,8 +10,8 @@ package com.mycompany.worldofecn;
  */
 public class Lapin extends Monstre {
     //constructeurs
-    public Lapin(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p){
-        super(pV, dA, pPar, paAtt, paPar, p);
+    public Lapin(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p, World monde){
+        super(pV, dA, pPar, paAtt, paPar, p, monde);
     }
     
     public Lapin(Lapin l){
@@ -20,8 +20,15 @@ public class Lapin extends Monstre {
              l.getPtPar(),
              l.getPageAtt(),
              l.getPagePar(),
-             l.getPos()
+             l.getPos(),
+             l.getMonde()
         );
+    }
+    
+    @Override
+    public void deplace() {
+        super.deplace();
+        this.getMonde().monde[this.getPos().getX()][this.getPos().getY()]= 'L';
     }
     
     public Lapin(){

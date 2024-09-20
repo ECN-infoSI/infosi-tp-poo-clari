@@ -13,7 +13,7 @@ public class World {
     public Archer robin;
     public Paysan peon;
     public Lapin bugs;
-    private char[][] monde;
+    public char[][] monde;
     
     //methodes
     public World(){
@@ -43,7 +43,9 @@ public class World {
         Point2D position_robin = new Point2D();
         position_robin.setX(entierAleaX);
         position_robin.setY(entierAleaY);
+        
         robin.setPos(position_robin);
+        robin.setMonde(this);
         
         monde[entierAleaX][entierAleaY] = 'A';
         
@@ -56,7 +58,7 @@ public class World {
         position_peon.setX(entierAleaX);
         position_peon.setY(entierAleaY);
         peon.setPos(position_peon);
-        
+        peon.setMonde(this);
         monde[entierAleaX][entierAleaY] = 'P';
         
         do{
@@ -68,6 +70,7 @@ public class World {
         position_bugs.setX(entierAleaX);
         position_bugs.setY(entierAleaY);
         bugs.setPos(position_bugs);
+        bugs.setMonde(this);
         
         monde[entierAleaX][entierAleaY] = 'L';
 
