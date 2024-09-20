@@ -6,7 +6,7 @@ package com.mycompany.worldofecn;
 
 /**
  *
- * @author Clara
+ * @author Clara objet
  */
 public abstract class Objet {
     
