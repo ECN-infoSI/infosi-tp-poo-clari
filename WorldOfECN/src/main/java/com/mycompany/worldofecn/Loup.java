@@ -25,7 +25,7 @@ public class Loup extends Monstre {
         super();
     }
     
-    //Methodes
+    //Autres methodes
     public void combattre(Creature c){
         
     }
