@@ -57,13 +57,13 @@ public class Point2D {
         System.out.println("Valeur de x: " + x + "\n Valeur de y: " + y);
     }
     
-    public double distance(Point2D p){
-        double dist;
+    public float distance(Point2D p){
+        float dist;
         int px = p.getX();
         int py = p.getY();
-        dist = Math.pow((x-px)^2+(y-py)^2,0.5); 
+        dist = (float)Math.pow((x-px)^2+(y-py)^2,0.5); 
         
         return dist;
     }
-    
+         
 }
