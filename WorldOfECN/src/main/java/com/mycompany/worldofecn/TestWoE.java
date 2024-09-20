@@ -33,7 +33,10 @@ public class TestWoE {
 
         System.out.println("Position de Robin ------ x: " + monMonde.robin.getPos().getX() + ", Y: "+ monMonde.robin.getPos().getY());
         System.out.println("Position de GuillaumeT ------ x: " + monMonde.guillaumeT.getPos().getX() + ", Y: "+ monMonde.guillaumeT.getPos().getY());
-
+        
+        
+        monMonde.robin.affiche();
+        monMonde.bugs.affiche();
 
     } 
 }

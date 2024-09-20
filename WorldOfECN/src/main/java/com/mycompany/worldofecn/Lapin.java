@@ -25,14 +25,16 @@ public class Lapin extends Monstre {
         );
     }
     
+    public Lapin(){
+        super();
+    }
+    
     @Override
     public void deplace() {
         super.deplace();
         this.getMonde().monde[this.getPos().getX()][this.getPos().getY()]= 'L';
     }
     
-    public Lapin(){
-        super();
-    }
+    
 }
     
