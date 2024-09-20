@@ -6,7 +6,7 @@ package com.mycompany.worldofecn;
 
 /**
  * test
- * @author Clara
+ * @author Clara et Lari
  */
 public class WorldOfECN {
 
