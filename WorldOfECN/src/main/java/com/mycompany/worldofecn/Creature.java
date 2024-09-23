@@ -100,6 +100,7 @@ public abstract class Creature {
         this.monde = monde;
     }
     
+    
     public void deplace(){
         Random randomise = new Random();
         int mouvement = randomise.nextInt(8);

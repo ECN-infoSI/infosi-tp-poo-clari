@@ -20,7 +20,7 @@ public class Lapin extends Monstre {
              l.getPtPar(),
              l.getPageAtt(),
              l.getPagePar(),
-             l.getPos(),
+             new Point2D(l.getPos()),
              l.getMonde()
         );
     }

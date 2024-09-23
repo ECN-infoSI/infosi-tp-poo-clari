@@ -17,7 +17,8 @@ public class Archer extends Personnage {
     }
     
     public Archer() {
-        this("", 0, 0, 0, 0, 0,0, null,0, null);
+        super();
+        this.nbFleches = 0;
     }
 
     public int getNbFleches() {

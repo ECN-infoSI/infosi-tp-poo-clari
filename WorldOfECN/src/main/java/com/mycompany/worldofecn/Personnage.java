@@ -28,6 +28,8 @@ public class Personnage extends Creature{
     
     public Personnage () {
         super();
+        this.nom = "";
+        this.distAttMax = 0;
     }
 
     public String getNom() {
@@ -48,7 +50,7 @@ public class Personnage extends Creature{
 
     @Override
     public String toString() {
-        return "Personnage{" + "nom=" + nom + ", distAttMax=" + distAttMax + '}';
+        return super.toString() + "Personnage{" + "nom=" + nom + ", distAttMax=" + distAttMax + '}';
     }
     
     @Override

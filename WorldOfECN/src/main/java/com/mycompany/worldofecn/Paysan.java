@@ -15,7 +15,11 @@ public class Paysan extends Personnage {
     }
     
     public Paysan (Paysan p) {
-        this(p.getNom(), p.getPtVie(), p.getDegAtt(), p.getPtPar(), p.getPageAtt(), p.getPagePar(), p.getDistAttMax(), p.getPos(), p.getMonde());
+        this(p.getNom(), p.getPtVie(), p.getDegAtt(), p.getPtPar(), p.getPageAtt(), p.getPagePar(), p.getDistAttMax(), new Point2D(p.getPos()), p.getMonde());
+    }
+    
+    public Paysan(){
+        super();
     }
     
     @Override
@@ -24,7 +28,4 @@ public class Paysan extends Personnage {
         this.getMonde().monde[this.getPos().getX()][this.getPos().getY()]= 'P';
     }
     
-    public Paysan(){
-        this("", 0, 0, 0, 0, 0,0, null, null);
-    }
 }

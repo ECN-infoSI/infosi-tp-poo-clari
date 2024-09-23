@@ -15,34 +15,33 @@ public class TestWoE {
                         
         //Test setters
         monMonde.peon.setPtVie(10);
-        monMonde.peon.setNom("Peon");
-        
-        monMonde.robin.setNom("Robin");
         monMonde.robin.setPageAtt(20);
+        monMonde.bugs1.setPtPar(5);
         
-        monMonde.bugs.setPtPar(5);
+        monMonde.afficheWorld();
         
-        monMonde.afficheMonde();
-        System.out.println("Position de Robin ------ x: " + monMonde.robin.getPos().getX() + ", Y: "+ monMonde.robin.getPos().getY());
-        System.out.println("Position de GuillaumeT ------ x: " + monMonde.guillaumeT.getPos().getX() + ", Y: "+ monMonde.guillaumeT.getPos().getY());
-
         //Afficher le monde apres un deplacement
         System.out.println("Allez-y! Déplacez-vous!");
         monMonde.robin.deplace();
-        monMonde.afficheMonde();
+        monMonde.bugs1.deplace();
+        monMonde.afficheWorld();
 
-        System.out.println("Position de Robin ------ x: " + monMonde.robin.getPos().getX() + ", Y: "+ monMonde.robin.getPos().getY());
-        System.out.println("Position de GuillaumeT ------ x: " + monMonde.guillaumeT.getPos().getX() + ", Y: "+ monMonde.guillaumeT.getPos().getY());
-        
+        System.out.println(monMonde.peon.getPos());
+        System.out.println(monMonde.wolfie.getPos());
         //Tests avec la nouvelle classe Creature
-        monMonde.robin.affiche();
-        monMonde.bugs.affiche();
-        
-        //Tests avec la nouvelle classe Loup
-        Loup lulu = new Loup();
-        System.out.print("Loup lulu: ");
-        lulu.affiche();
+        //monMonde.robin.affiche();
+        //monMonde.bugs1.affiche();
        
-
+        /*
+        monMonde.robin.affiche();
+        monMonde.bugs1.affiche();
+        monMonde.bugs2.affiche();
+        monMonde.peon.affiche();
+        monMonde.grosBill.affiche();
+        monMonde.wolfie.affiche();
+        monMonde.guillaumeT.affiche();
+        */
+        System.out.println("Distance entre Wolfie et Paysan: "+ monMonde.peon.getPos().distance(monMonde.wolfie.getPos()));
+        
     } 
 }

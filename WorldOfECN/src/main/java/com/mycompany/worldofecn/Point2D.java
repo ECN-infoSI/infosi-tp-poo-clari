@@ -61,7 +61,7 @@ public class Point2D {
         float dist;
         int px = p.getX();
         int py = p.getY();
-        dist = (float)Math.pow((x-px)^2+(y-py)^2,0.5); 
+        dist = (float)Math.pow(Math.pow((x-px), 2)+Math.pow((y-py),2),0.5); 
         
         return dist;
     }

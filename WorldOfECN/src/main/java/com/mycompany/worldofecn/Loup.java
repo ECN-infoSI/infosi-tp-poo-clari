@@ -25,6 +25,12 @@ public class Loup extends Monstre {
         super();
     }
     
+    @Override
+    public void deplace() {
+        super.deplace();
+        this.getMonde().monde[this.getPos().getX()][this.getPos().getY()]= 'W';
+    }
+    
     //Autres methodes
     public void combattre(Creature c){
         

@@ -12,23 +12,58 @@ import java.util.Random;
 public class World {
     public Archer robin;
     public Paysan peon;
-    public Lapin bugs;
+    public Lapin bugs1;
+    public Lapin bugs2;
     public Archer guillaumeT;
+    public Guerrier grosBill;
+    public Loup wolfie;
     public char[][] monde;
     
     //methodes
     public World(){
         robin = new Archer();
         peon = new Paysan();
-        bugs = new Lapin();
+        bugs1 = new Lapin();
+        bugs2 = new Lapin();
+        guillaumeT = new Archer();
+        grosBill = new Guerrier();
+        wolfie = new Loup();
         monde = new char [20][20];
     }
     
     //positionne les personnages de maniere aleatoire
-    public void creerMondeAlea(){
+    public void creerCreature(Creature c) {
         Random generateurAleatoire = new Random();
         int entierAleaX = 0;
         int entierAleaY = 0;
+        
+        do{
+            entierAleaX = generateurAleatoire.nextInt(20);
+            entierAleaY = generateurAleatoire.nextInt(20);
+        }while(monde[entierAleaX][entierAleaY] != '0');
+        
+        Point2D position = new Point2D();
+        position.setX(entierAleaX);
+        position.setY(entierAleaY);
+        
+        c.setPos(position);
+        c.setMonde(this);
+        
+        if (c instanceof Archer) {
+            monde[entierAleaX][entierAleaY] = 'A';
+        } else if (c instanceof Paysan) {
+            monde[entierAleaX][entierAleaY] = 'P';
+        } else if (c instanceof Lapin) {
+            monde[entierAleaX][entierAleaY] = 'L';
+        } else if (c instanceof Guerrier) {
+            monde[entierAleaX][entierAleaY] = 'G';
+        } else if (c instanceof Loup) {
+            monde[entierAleaX][entierAleaY] = 'W';
+        }
+            
+    }
+        
+    public void creerMondeAlea(){
         
         for(int i = 0; i<20; i++){
             for (int j = 0 ; j<20; j++){
@@ -36,46 +71,29 @@ public class World {
             }
         }
         
-        do{
-            entierAleaX = generateurAleatoire.nextInt(20);
-            entierAleaY = generateurAleatoire.nextInt(20);
-        }while(monde[entierAleaX][entierAleaY] != '0');
+        // Création robin
+        creerCreature(robin);
+        robin.setNom("robin");
         
-        Point2D position_robin = new Point2D();
-        position_robin.setX(entierAleaX);
-        position_robin.setY(entierAleaY);
+        // Création peon
+        creerCreature(peon);
+        peon.setNom("peon");
         
-        robin.setPos(position_robin);
-        robin.setMonde(this);
-        
-        monde[entierAleaX][entierAleaY] = 'A';
-        
-        do{
-            entierAleaX = generateurAleatoire.nextInt(20);
-            entierAleaY = generateurAleatoire.nextInt(20);
-        }while(monde[entierAleaX][entierAleaY] != '0');
-        
-        Point2D position_peon = new Point2D();
-        position_peon.setX(entierAleaX);
-        position_peon.setY(entierAleaY);
-        peon.setPos(position_peon);
-        peon.setMonde(this);
-        monde[entierAleaX][entierAleaY] = 'P';
-        
-        do{
-            entierAleaX = generateurAleatoire.nextInt(20);
-            entierAleaY = generateurAleatoire.nextInt(20);
-        }while(monde[entierAleaX][entierAleaY] != '0');
-        
-        Point2D position_bugs = new Point2D();
-        position_bugs.setX(entierAleaX);
-        position_bugs.setY(entierAleaY);
-        bugs.setPos(position_bugs);
-        bugs.setMonde(this);
-        
-        monde[entierAleaX][entierAleaY] = 'L';
+        // Création bugs1
+        creerCreature(bugs1);
 
-        guillaumeT = new Archer(robin);
+        // Création bugs2
+        creerCreature(bugs2);
+        
+        // Création guillaumeT
+        creerCreature(guillaumeT);
+        guillaumeT.setNom("guillaumeT");
+        
+        // Création grosBill
+        creerCreature(grosBill);
+        
+        // Création wolfie
+        creerCreature(wolfie);
         
     }
 
@@ -83,7 +101,11 @@ public class World {
         return monde;
     }
 
-    public void afficheMonde() {
+    public void tourDeJeu() {
+        
+    }
+    
+    public void afficheWorld() {
         for(int i = 0; i<20; i++){
             for (int j = 0 ; j<20; j++){
                 System.out.print(monde[i][j] + " ");
