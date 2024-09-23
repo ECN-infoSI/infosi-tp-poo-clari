@@ -33,6 +33,14 @@ public class TestWoE {
         monMonde.robin.setPtPar(40); //baisse degat fait en cas de defense
         monMonde.robin.setNbFleches(10);
         
+        monMonde.guillaumeT.setPageAtt(80); //haute percentage de reussite d'attaque
+        monMonde.guillaumeT.setDegAtt(40); //baisse degat d'attaque
+        monMonde.guillaumeT.setDistAttMax(6); //peut se combattre a distance
+        monMonde.guillaumeT.setPtVie(100); 
+        monMonde.guillaumeT.setPagePar(80); //haute percentage de defense
+        monMonde.guillaumeT.setPtPar(40); //baisse degat fait en cas de defense
+        monMonde.guillaumeT.setNbFleches(10);
+        
         //Set loup
         monMonde.wolfie.setPageAtt(50); //moyenne percentage de reussite d'attaque
         monMonde.wolfie.setDegAtt(85); //haute degat d'attaque
@@ -120,6 +128,12 @@ public class TestWoE {
         //Essai de faire un combat a distance avec Wolfie
         System.out.println("--Wolfie vs Robin--");
         monMonde.wolfie.combattre(monMonde.robin);
+        System.out.println("--");
+        
+        System.out.println("--Robin vs GuillaumeT--");
+        monMonde.guillaumeT.getPos().setPosition(14,14);
+        System.out.println("Distance entre GuillaumeT et Robin: "+ monMonde.robin.getPos().distance(monMonde.guillaumeT.getPos()));
+        monMonde.robin.combattre(monMonde.guillaumeT);
         System.out.println("--");
  
     } 

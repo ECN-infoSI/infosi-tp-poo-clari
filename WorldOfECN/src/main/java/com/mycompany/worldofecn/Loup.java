@@ -61,12 +61,17 @@ public class Loup extends Monstre {
                     System.out.println("Defense reussie!");
                     nouveauPtVie = c.getPtVie() - (this.getDegAtt() - c.getPtPar());
                 }
- 
-                
+           
             } else{
                 System.out.println("Attaque ratee!");
                 //ni l'attaquant ni le defenseur subient des degats
 
+            }
+            
+            if(c instanceof Archer){
+                int numFleches;
+                numFleches = ((Archer)c).getNbFleches() - 1;
+                System.out.println("Nombre de fleches defenseur: " + numFleches);
             }
             
             if(nouveauPtVie > 100){

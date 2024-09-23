@@ -58,6 +58,12 @@ public class Guerrier extends Personnage {
                 System.out.println("Attaque ratee!");
                 //ni l'attaquant ni le defenseur subissent des degats
             }
+            
+            if(c instanceof Archer){
+                int numFleches;
+                numFleches = ((Archer)c).getNbFleches() - 1;
+                System.out.println("Nombre de fleches defenseur: " + numFleches);
+            }
          
         }
         
