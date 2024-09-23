@@ -33,6 +33,13 @@ public class Loup extends Monstre {
         this.getMonde().monde[this.getPos().getX()][this.getPos().getY()]= 'W';
     }
     
+    @Override
+    public void setPos(Point2D pos) {
+        super.setPos(pos);
+        if (this.getMonde() != null)
+            this.getMonde().monde[pos.getX()][pos.getY()]= 'W';
+    }
+    
     //Autres methodes
     public void combattre(Creature c){
       //Creature c est le defenseur

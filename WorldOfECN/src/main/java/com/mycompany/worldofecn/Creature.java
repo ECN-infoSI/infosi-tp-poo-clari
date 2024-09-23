@@ -89,6 +89,9 @@ public abstract class Creature {
     }
 
     public void setPos(Point2D pos) {
+        if (monde != null) {
+            monde.monde[this.pos.getX()][this.pos.getY()]= '0';
+        }
         this.pos = pos;
     }
 

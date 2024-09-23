@@ -26,6 +26,13 @@ public class Archer extends Personnage {
     public int getNbFleches() {
         return nbFleches;
     }
+    
+    @Override
+    public void setPos(Point2D pos) {
+        super.setPos(pos);
+        if (this.getMonde() != null){
+            this.getMonde().monde[pos.getX()][pos.getY()]= 'A';}
+    }
 
     @Override
     public void deplace() {

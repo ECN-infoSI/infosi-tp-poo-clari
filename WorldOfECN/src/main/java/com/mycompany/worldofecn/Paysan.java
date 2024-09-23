@@ -23,6 +23,13 @@ public class Paysan extends Personnage {
     }
     
     @Override
+    public void setPos(Point2D pos) {
+        super.setPos(pos);
+        if (this.getMonde() != null){
+            this.getMonde().monde[pos.getX()][pos.getY()]= 'P';}
+    }
+    
+    @Override
     public void deplace() {
         super.deplace();
         this.getMonde().monde[this.getPos().getX()][this.getPos().getY()]= 'P';
