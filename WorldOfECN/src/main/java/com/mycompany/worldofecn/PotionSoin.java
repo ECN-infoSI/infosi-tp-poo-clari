@@ -10,29 +10,20 @@ package com.mycompany.worldofecn;
  */
 public class PotionSoin extends Objet {
     private int force;
-    private Point2D pos;
-    private World monde;
 
-    public Point2D getPos() {
-        return pos;
-    }
-
-    public void setPos(Point2D pos) {
-        this.pos = pos;
-    }
-
-    public void disparaitre() {
-        //this.monde.getMonde()[pos.getX()][pos.getY()] = '0'; //precisa? Ou vai ter o heroi em cima ja?
-        this.pos = null;
-        this.force = 0;
-    }
-    
-    public void PotionSoin (int force) {
+    public PotionSoin (Point2D p, World m, int force) {
+        super(p, m);
         this.force = force;
     }
     
-    public void PotionSoin (PotionSoin potion) {
-        this.force = potion.getForce();
+    public PotionSoin (PotionSoin p) {
+        super(p);
+        this.force = p.getForce();
+    }
+    
+    public PotionSoin () {
+        super();
+        this.force = 0;
     }
     
     public void PotionSoin () {
@@ -47,4 +38,12 @@ public class PotionSoin extends Objet {
         this.force = force;
     }
     
+    @Override
+    public void setPos(Point2D pos) {
+        super.setPos(pos);
+        if (this.getMonde() != null) {
+            this.getMonde().getMonde()[this.getPos().getX()][this.getPos().getY()] = 'X';
+            this.getMonde().getObjets()[this.getPos().getX()][this.getPos().getY()] = this;
+        }
+    }
 }

@@ -54,7 +54,7 @@ public class Point2D {
     }
     
     public void affiche(){
-        System.out.println("Valeur de x: " + x + "\n Valeur de y: " + y);
+        System.out.println("Valeur de x: " + x + ", Valeur de y: " + y);
     }
     
     public float distance(Point2D p){

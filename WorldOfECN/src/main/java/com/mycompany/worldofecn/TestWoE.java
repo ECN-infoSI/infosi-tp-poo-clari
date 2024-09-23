@@ -136,5 +136,31 @@ public class TestWoE {
         monMonde.robin.combattre(monMonde.guillaumeT);
         System.out.println("--");
  
+        //Test d'objets
+        System.out.println("Test d'objets");
+        
+        Point2D positionPotion = new Point2D(13,14);
+        monMonde.guillaumeT.getPos().setPosition(14,14);
+        monMonde.potion1.setPos(positionPotion);
+        
+        System.out.print("Position de la potion: ");
+        monMonde.potion1.getPos().affiche();
+        System.out.print("Position de GuillaumeT: ");
+        monMonde.guillaumeT.getPos().affiche();
+        System.out.println("Pts de vie de GuillaumeT: " + monMonde.guillaumeT.getPtVie());
+        System.out.println("--");
+        
+        System.out.println("GuillaumeT se deplace!");
+        monMonde.guillaumeT.setPos(positionPotion);
+
+        System.out.print("Position de GuillaumeT: ");
+        monMonde.guillaumeT.getPos().affiche();
+        System.out.println("Pts de vie de GuillaumeT: " + monMonde.guillaumeT.getPtVie());
+        
+        System.out.println("--");
+        
+        
+        
+        //Afficher le monde avec des potions soin
     } 
 }

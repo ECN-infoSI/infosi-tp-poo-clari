@@ -57,5 +57,26 @@ public class Personnage extends Creature{
     public void affiche() {
         System.out.println(this.toString() + super.toString());
     }
-          
+    
+    public void boireSoin() {
+        if (this.getMonde() != null) {
+            if (this.getMonde().getObjets()[this.getPos().getX()][this.getPos().getY()] instanceof PotionSoin) {
+                PotionSoin p = (PotionSoin)this.getMonde().getObjets()[this.getPos().getX()][this.getPos().getY()];
+                this.setPtVie(this.getPtVie()+p.getForce());
+                p.disparaitre();
+                System.out.println("!!!!Le personnage a bu la potion!!!!!");
+            }
+        }
+    }
+    @Override
+    public void deplace() {
+        super.deplace();
+        boireSoin();
+    }
+    
+    @Override 
+    public void setPos(Point2D pos) {
+        super.setPos(pos);
+        boireSoin();
+    }
 }

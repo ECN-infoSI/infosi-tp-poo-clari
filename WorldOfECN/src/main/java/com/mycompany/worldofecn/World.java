@@ -18,6 +18,10 @@ public class World {
     public Guerrier grosBill;
     public Loup wolfie;
     public char[][] monde;
+    public PotionSoin potion1;
+    public PotionSoin potion2;
+    public PotionSoin potion3;
+    public Objet[][] objets;
     
     //methodes
     public World(){
@@ -29,8 +33,12 @@ public class World {
         grosBill = new Guerrier();
         wolfie = new Loup();
         monde = new char [20][20];
+        objets = new Objet[20][20];
+        potion1 = new PotionSoin();
+        potion2 = new PotionSoin();
+        potion3 = new PotionSoin();
     }
-    
+
     //positionne les personnages de maniere aleatoire
     public void creerCreature(Creature c) {
         Random generateurAleatoire = new Random();
@@ -62,6 +70,36 @@ public class World {
         }
             
     }
+    
+    public void creerObjet(Objet o) {
+        Random generateurAleatoire = new Random();
+        int entierAleaX = 0;
+        int entierAleaY = 0;
+        
+        do{
+            entierAleaX = generateurAleatoire.nextInt(20);
+            entierAleaY = generateurAleatoire.nextInt(20);
+        }while(monde[entierAleaX][entierAleaY] != '0');
+        
+        Point2D position = new Point2D();
+        position.setX(entierAleaX);
+        position.setY(entierAleaY);
+        
+        o.setPos(position);
+        o.setMonde(this);
+        
+        if (o instanceof PotionSoin) {
+            monde[entierAleaX][entierAleaY] = 'X';            
+        } else if (o instanceof Epee) {
+            monde[entierAleaX][entierAleaY] = 'E';
+        }             
+        objets[entierAleaX][entierAleaY] = o;
+    }
+    
+    public void creerObjet(PotionSoin o, int force) {
+        creerObjet(o);
+        o.setForce(force);
+    }
         
     public void creerMondeAlea(){
         
@@ -71,6 +109,7 @@ public class World {
             }
         }
         
+                
         // Création robin
         creerCreature(robin);
         robin.setNom("robin");
@@ -95,6 +134,11 @@ public class World {
         // Création wolfie
         creerCreature(wolfie);
         
+        // Création potions
+        creerObjet(potion1, 10);
+        creerObjet(potion2, 20);
+        creerObjet(potion3, 30);
+        
     }
 
     public char[][] getMonde() {
@@ -114,6 +158,13 @@ public class World {
         } 
     }
     
+    public Objet[][] getObjets() {
+        return objets;
+    }
+
+    public void setObjets(Objet o, int x, int y) {
+        this.objets[x][y] = o;
+    }
     
 }
     
