@@ -48,9 +48,13 @@ public class Point2D {
         this.y = y;
     }
     
-    public void translate(int dx, int dy){
-        x = x+ dx;
-        y = y + dy;
+    public boolean translate(int dx, int dy){
+        if (x+ dx < 20 && y + dy < 20 && y + dy >= 0 && x+ dx>=0) {
+            x = x+ dx;
+            y = y + dy;
+            return true;
+        }
+        return false;
     }
     
     public void affiche(){

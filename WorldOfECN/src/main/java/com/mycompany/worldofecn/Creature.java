@@ -106,18 +106,40 @@ public abstract class Creature {
     
     public void deplace(){
         Random randomise = new Random();
-        int mouvement = randomise.nextInt(8);
+        int mouvement;
+        boolean bouge = false;
         monde.monde[pos.getX()][pos.getY()]= '0';
-        switch (mouvement) {
-            case 0 -> pos.translate(0, 1);
-            case 1 -> pos.translate(0, -1);
-            case 2 -> pos.translate(1, 0);
-            case 3 -> pos.translate(-1, 0);
-            case 4 -> pos.translate(1, 1);
-            case 5 -> pos.translate(1, -1);
-            case 6 -> pos.translate(-1, 1);
-            case 7 -> pos.translate(-1, -1);
-            default -> pos.translate(0,0);
+        
+        while (bouge == false) {
+            mouvement = randomise.nextInt(8);
+            switch (mouvement) {
+                case 0:
+                    bouge = pos.translate(0, 1);
+                    break;
+                case 1:
+                    bouge = pos.translate(0, -1);
+                    break;
+                case 2:
+                    bouge = pos.translate(1, 0);
+                    break;
+                case 3:
+                    bouge = pos.translate(-1, 0);
+                    break;
+                case 4:
+                    bouge = pos.translate(1, 1);
+                    break;
+                case 5:
+                    bouge = pos.translate(1, -1);
+                    break;
+                case 6:
+                    bouge = pos.translate(-1, 1);
+                    break;
+                case 7:
+                    bouge = pos.translate(-1, -1);
+                    break;
+                default:
+                    pos.translate(0,0);
+            }
         }
     }
     
