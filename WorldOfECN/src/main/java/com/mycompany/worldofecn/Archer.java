@@ -12,7 +12,8 @@ public class Archer extends Personnage {
        this.nbFleches = 0;
     }
     public Archer (Archer A) {
-       this(A.getNom(), A.getPtVie(), A.getDegAtt(), A.getPtPar(), A.getPageAtt(), A.getPagePar(), A.getDistAttMax(), new Point2D(A.getPos()), A.getNbFleches(), A.getMonde());
+       this(A.getNom(), A.getPtVie(), A.getDegAtt(), A.getPtPar(), A.getPageAtt(), 
+               A.getPagePar(), A.getDistAttMax(), new Point2D(A.getPos()), A.getNbFleches(), A.getMonde());
     }
     
     public Archer() {
@@ -33,5 +34,7 @@ public class Archer extends Personnage {
         this.nbFleches = nbFleches;
     }
     
-    
+    public void combattre(Creature c){
+        
+    }
 }
