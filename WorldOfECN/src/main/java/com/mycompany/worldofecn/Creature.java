@@ -184,7 +184,6 @@ public abstract class Creature {
      */
     public void deplace(){
         Random randomise = new Random();
-        int mouvement;
         int dx = 0;
         int dy = 0;
         boolean bouge = false;
@@ -192,48 +191,8 @@ public abstract class Creature {
         this.monde.getCreatures()[this.pos.getX()][this.pos.getY()] = null;
         
         while (bouge == false) {
-            mouvement = randomise.nextInt(8);
-            
-            //bouge = (pos.translate(0, 1, 0) != null) && this.monde.getCreatures(pos.translate(0, 1, 0)) == null;
-       
-            switch (mouvement) {
-                case 0:
-                    dx = 0;
-                    dy = 1;  
-                    break;
-                case 1:
-                    dx = 0;
-                    dy = -1; 
-                    break;
-                case 2:
-                    dx = 1;
-                    dy = 0; 
-                    break;
-                case 3:
-                    dx = -1;
-                    dy = 0; 
-                    break;
-                case 4:
-                    dx = 1;
-                    dy = 1; 
-                    break;
-                case 5:
-                    dx = 1;
-                    dy = -1; 
-                    break;
-                case 6:
-                    dx = -1;
-                    dy = 1; 
-                    break;
-                case 7:
-                    dx = -1;
-                    dy = -1; 
-                    break;
-                default:
-                    dx = 0;
-                    dy = 0; 
-                    pos.translate(0,0, 0);
-            }
+            dx = randomise.nextInt(3) - 1;
+            dy = randomise.nextInt(3)- 1;
             bouge = (pos.translate(dx, dy, 0) != null) && this.monde.getCreatures(pos.translate(dx, dy, 0)) == null;    
         }
         this.setPos(pos.translate(dx, dy, 0));
