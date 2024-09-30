@@ -5,7 +5,7 @@
 package com.mycompany.worldofecn;
 
 /**
- * @author Larissa ALBUQUERQUE NOGUEIRA
+ * @author Larissa ALBUQUERQUE NOGUEIRA et Clara MATTOS MEDEIROS
  */
 //represente un point a coordonnees entieres en 2 dimensions
 public class Point2D {
@@ -14,8 +14,8 @@ public class Point2D {
  
     /**
      *
-     * @param x
-     * @param y
+     * @param x Coordonnées en x
+     * @param y Coordonnées en y
      */
     public Point2D(int x, int y){
         this.x = x;
@@ -82,9 +82,9 @@ public class Point2D {
     }
     
     /**
-     *
-     * @param dx
-     * @param dy
+     * Translate un point de sa position actuelle de dx et dy
+     * @param dx valeur à déplacer sur l'axe x (peut être négatif)
+     * @param dy valeur à déplacer sur l'axe x (peut être négatif)
      * @return
      */
     public boolean translate(int dx, int dy){
@@ -111,9 +111,9 @@ public class Point2D {
     }
     
     /**
-     *
+     * Calcule la distance entre le point qui appele la méthode et le point p
      * @param p
-     * @return
+     * @return dist Distance entre deux points
      */
     public float distance(Point2D p){
         float dist;

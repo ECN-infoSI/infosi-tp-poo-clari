@@ -46,7 +46,7 @@ public class Loup extends Monstre {
     }
     
     /**
-     *
+     * Deplace le loup dans le monde et mets un 'W' dans sa place pour l'affichage de la carte du monde
      */
     @Override
     public void deplace() {
@@ -67,9 +67,14 @@ public class Loup extends Monstre {
     
     //Autres methodes
 
-    /**
+     /**
+     * Traite le combat corps à corps entre deux protagonistes.
+     * Si le combat est corps à corps, l'attaquant fait son attaque avec une percentage de réussite pageAtt.
+     * Si l'attaquant réussi, le défenseur a une perte de degAtt dans ses points de vie. Dans ce type de combat,
+     * le defenseur a droit a une réponse, qui a percentage de réussite de pagePar. S'il réussit son parade,
+     * il perd le total de points de dégat - points de parade (pPar) de ses points de vie.
      *
-     * @param c
+     * @param c Creature qui va défendre l'attaque.
      */
     public void combattre(Creature c){
       //Creature c est le defenseur

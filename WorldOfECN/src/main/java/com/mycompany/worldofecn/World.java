@@ -8,43 +8,43 @@ import java.util.ArrayList;
 
 /**
  *
- * @author User
+ * @author Larissa et Clara
  * @param
  */
 public class World {
 
     /**
-     *
+     * Carte utilisée pour l'affichage à l'utilisateur
      */
     public char[][] monde;
 
     /**
-     *
+     * Carte des objets du jeu
      */
     public Objet[][] objetMap;
     
     /**
-     *
+     * Carte des creatures du jeu
      */
     public Creature[][] creatures;
 
     /**
-     *
+     * Liste de tous les personnages du jeu - humanoides seulement
      */
     public ArrayList<Personnage> personnages;
 
     /**
-     *
+     * Liste de tous les monstres du jeu
      */
     public ArrayList<Monstre> monstres;
 
     /**
-     *
+     * Liste de tous les objets du jeu
      */
     public ArrayList<Objet> objets;
     
     /**
-     *
+     * Taille du monde carré
      */
     public  static  final  int taille =  50; 
     
@@ -64,10 +64,8 @@ public class World {
         
     }
 
-    //positionne les personnages de maniere aleatoire
-
     /**
-     * Etant donne une creature, la assigne une position aleatoire dans le monde
+     * Etant donnée une creature, la assigne une position aleatoire dans le monde
      * @param c
      */
     public void creerCreature(Creature c) {
@@ -107,8 +105,8 @@ public class World {
     }
     
     /**
-     *
-     * @param o
+     *Étant donné un objet, le positionne aleatoirement dans le monde 
+     * @param o Objet
      */
     public void creerObjet(Objet o) {
         Random generateurAleatoire = new Random();
@@ -136,7 +134,7 @@ public class World {
     }
     
     /**
-     *
+     * Cree un objet et parametre sa force
      * @param o
      * @param force
      */
@@ -152,8 +150,8 @@ public class World {
      * @param nbGuerrier nombre de Guerriers dans le jeu
      * @param nbLapin nombre de Lapins dans le jeu
      * @param nbLoup nombre de Loups dans le jeu
-     * @param nbEpee
-     * @param nbPotion
+     * @param nbEpee nombre d'Epees dans le jeu
+     * @param nbPotion nombre de Potions dans le jeu
      */
     public void creerMondeAlea(int nbArcher, int nbPaysan, int nbGuerrier, int nbLapin, int nbLoup, int nbEpee, int nbPotion){
         
@@ -222,14 +220,13 @@ public class World {
     }
 
     /**
-     *
+     * Gère le tour de jeu pour les joueurs
      */
     public void tourDeJeu() {
-        
     }
     
     /**
-     *
+     * Affiche à l'écran la carte du jeu pour l'utilisateur, avec la position des objets, personnages et monstres
      */
     public void afficheWorld() {
         for(int i = 0; i<taille; i++){

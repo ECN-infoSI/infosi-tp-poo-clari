@@ -10,11 +10,18 @@ package com.mycompany.worldofecn;
  */
 public class Epee extends Objet {
     
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return super.toString() + "Epee{}";
     }
     
+    /**
+     *
+     */
     @Override
     public void affiche() {
         System.out.println(this.toString());

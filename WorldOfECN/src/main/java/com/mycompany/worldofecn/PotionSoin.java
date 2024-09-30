@@ -13,9 +13,9 @@ public class PotionSoin extends Objet {
 
     /**
      *
-     * @param p
-     * @param m
-     * @param force
+     * @param p Position de la potion
+     * @param m 
+     * @param force Force que la potion rend au personnage qui la bois
      */
     public PotionSoin (Point2D p, World m, int force) {
         super(p, m);

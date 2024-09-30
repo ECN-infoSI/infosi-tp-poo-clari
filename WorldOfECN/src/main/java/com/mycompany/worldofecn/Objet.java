@@ -6,7 +6,7 @@ package com.mycompany.worldofecn;
 
 /**
  *
- * @author Clara objet
+ * @author Clara et Larissa
  */
 public abstract class Objet {
     private Point2D pos;
@@ -14,8 +14,8 @@ public abstract class Objet {
    
     /**
      *
-     * @param pos
-     * @param monde
+     * @param pos Position de l'objet dans le monde 
+     * @param monde Carte de tous les personnages et objets du jeu
      */
     public Objet(Point2D pos, World monde) {
         this.pos = pos;
@@ -23,7 +23,7 @@ public abstract class Objet {
     }
     
     /**
-     *
+     * Constructeur par défaut 
      */
     public Objet() {
         this.pos = null;
@@ -41,7 +41,7 @@ public abstract class Objet {
     
     /**
      *
-     * @return
+     * @return monde
      */
     public World getMonde() {
         return monde;
@@ -57,7 +57,7 @@ public abstract class Objet {
 
     /**
      *
-     * @return
+     * @return pos
      */
     public Point2D getPos() {
         return pos;
@@ -76,10 +76,9 @@ public abstract class Objet {
     }
 
     /**
-     *
+     * Efface l'objet de la carte du monde
      */
     public void disparaitre() {
-        //this.monde.getMonde()[pos.getX()][pos.getY()] = '0'; //precisa? Ou vai ter o heroi em cima ja?
         this.monde.getObjetMap()[pos.getX()][pos.getY()] = null;
     }
     

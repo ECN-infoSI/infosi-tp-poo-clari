@@ -6,7 +6,7 @@ package com.mycompany.worldofecn;
 
 /**
  *
- * @author Clara
+ * @author Clara MATTOS MEDEIROS et Larissa ALBUQUERQUE NOGUEIRA
  */
 public class Paysan extends Personnage {
     
@@ -53,7 +53,7 @@ public class Paysan extends Personnage {
     }
     
     /**
-     *
+     * Deplace le personnage dans le monde et mets un 'P' pour l'affichage de la carte du monde
      */
     @Override
     public void deplace() {

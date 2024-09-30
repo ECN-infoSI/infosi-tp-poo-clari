@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  *
- * @author Clara 
+ * @author Clara et Larissa
  */
 public class Archer extends Personnage {
     private int nbFleches;
@@ -63,7 +63,7 @@ public class Archer extends Personnage {
     }
 
     /**
-     *
+     * Deplace l'archer dans le monde et mets un 'A' dans sa position à la carte du monde
      */
     @Override
     public void deplace() {
@@ -80,8 +80,16 @@ public class Archer extends Personnage {
     }
     
     /**
+     * Traite le combat corps à corps et à distance entre deux Personnages ou deux creatures.
+     * Si le combat est corps à corps, l'attaquant fait son attaque avec une percentage de réussite pageAtt.
+     * Si l'attaquant réussi, le défenseur a une perte de degAtt dans ses points de vie. Dans ce type de combat,
+     * le defenseur a droit a une réponse, qui a percentage de réussite de pagePar. S'il réussit son parade,
+     * il perd le total de points de dégat - points de parade (pPar) de ses points de vie.
+     * 
+     * Si le combat est à distance, seulement l'attaquant a le droit d'attaque, qui marche de la même façon que
+     * le combat corps à corps.
      *
-     * @param c
+     * @param c Creature qui va défendre l'attaque.
      */
     public void combattre(Creature c){
         int tirage, nouveauPtVie;

@@ -59,7 +59,7 @@ public class Lapin extends Monstre {
     }
     
     /**
-     *
+     * Deplace le lapin dans le monde et mets un 'L' dans sa place pour l'affichage de la carte du jeu
      */
     @Override
     public void deplace() {

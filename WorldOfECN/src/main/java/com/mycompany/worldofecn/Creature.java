@@ -8,7 +8,7 @@ import java.util.Random;
 
 /**
  *
- * @author 
+ * @author Larissa et Clara
  */
 public abstract class Creature {
     private int ptVie;
@@ -23,13 +23,14 @@ public abstract class Creature {
 
     /**
      *
-     * @param pV
-     * @param dA
-     * @param pPar
-     * @param paAtt
-     * @param paPar
-     * @param p
-     * @param monde
+     * 
+     * @param pV Points de Vie
+     * @param dA Degats d'Attaque
+     * @param pPar Points de Parade
+     * @param paAtt Pourcentage d'Attaque
+     * @param paPar Pourcentage de Parade
+     * @param p Objet du type Point2D pour la position du Personnage dans le monde
+     * @param monde La carte avec toutes les positions de tous les personnages du jeu
      */
     public Creature(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p, World monde){
         this.ptVie = pV;
@@ -55,7 +56,7 @@ public abstract class Creature {
     }
     
     /**
-     *
+     * Constructeur par défaut
      */
     public Creature(){
         this(0,0,0,0,0,null,null);
@@ -180,7 +181,8 @@ public abstract class Creature {
     }
     
     /**
-     *
+     * Deplace une creature dans le monde
+     * 
      */
     public void deplace(){
         Random randomise = new Random();
@@ -209,7 +211,7 @@ public abstract class Creature {
     }
     
     /**
-     *
+     * Affiche les attributs de la creature à l'écran
      */
     public void affiche(){
         System.out.println(this.toString());
