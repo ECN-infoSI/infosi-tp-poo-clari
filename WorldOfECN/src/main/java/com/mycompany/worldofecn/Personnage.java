@@ -6,7 +6,7 @@ package com.mycompany.worldofecn;
 
 /**
  *
- * @author Clara
+ * @author Clara MATTOS MEDEIROS et Larissa ALBUQUERQUE NOGUEIRA
  */
 public class Personnage extends Creature{
     private String nom;
@@ -14,15 +14,15 @@ public class Personnage extends Creature{
     
     /**
      *
-     * @param n
-     * @param pV
-     * @param dA
-     * @param pPar
-     * @param paAtt
-     * @param paPar
-     * @param dMax
-     * @param p
-     * @param monde
+     * @param n Nom du Personnage
+     * @param pV Points de Vie
+     * @param dA Degats d'Attaque
+     * @param pPar Points de Parade
+     * @param paAtt Pourcentage d'Attaque
+     * @param paPar Pourcentage de Parade
+     * @param dMax Distance maximale d'attaque
+     * @param p Objet du type Point2D pour la position du Personnage dans le monde
+     * @param monde La carte avec toutes les personnages du jeu
      */
     public Personnage (String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p, World monde){
         super(pV, dA, pPar, paAtt, paPar, p, monde);
@@ -43,7 +43,7 @@ public class Personnage extends Creature{
     }
     
     /**
-     *
+     * Constructeur par défaut de Personnage
      */
     public Personnage () {
         super();
@@ -53,7 +53,7 @@ public class Personnage extends Creature{
 
     /**
      *
-     * @return
+     * @return nom
      */
     public String getNom() {
         return nom;
@@ -69,7 +69,7 @@ public class Personnage extends Creature{
 
     /**
      *
-     * @return
+     * @return distAttMax
      */
     public int getDistAttMax() {
         return distAttMax;
@@ -85,7 +85,7 @@ public class Personnage extends Creature{
 
     /**
      *
-     * @return
+     * Retour de tous les attributs du Personnage
      */
     @Override
     public String toString() {
@@ -93,7 +93,7 @@ public class Personnage extends Creature{
     }
     
     /**
-     *
+     * Afficher les informations du personnage
      */
     @Override
     public void affiche() {
@@ -101,7 +101,10 @@ public class Personnage extends Creature{
     }
     
     /**
-     *
+     * Fonction qui verifie s'il y a une potion, et que traite le cas s'il y en a une.
+     * Dans le cas où il y en a, le personnage bois la potion,
+     * la force de la potion est sommé à ses points de vie et après la potion disparait. 
+     * Une message est affiché.
      */
     public void boireSoin() {
         if (this.getMonde() != null) {
@@ -115,7 +118,7 @@ public class Personnage extends Creature{
     }
 
     /**
-     *
+     * Déplace un personnage dans le monde
      */
     @Override
     public void deplace() {
