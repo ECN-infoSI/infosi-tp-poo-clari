@@ -4,45 +4,40 @@
  */
 package com.mycompany.worldofecn;
 import java.util.Random;
+import java.util.ArrayList;
 
 /**
  *
  * @author User
+ * @param
  */
 public class World {
-    public Archer robin;
-    public Paysan peon;
-    public Lapin bugs1;
-    public Lapin bugs2;
-    public Archer guillaumeT;
-    public Guerrier grosBill;
-    public Loup wolfie;
     public char[][] monde;
-    public PotionSoin potion1;
-    public PotionSoin potion2;
-    public PotionSoin potion3;
-    public Objet[][] objets;
-    public Creature[][] creatures;
-
+    public Objet[][] objetMap;
     
+    public Creature[][] creatures;
+    public ArrayList<Personnage> personnages;
+    public ArrayList<Monstre> monstres;
+    public ArrayList<Objet> objets;
+
     //methodes
     public World(){
-        robin = new Archer();
-        peon = new Paysan();
-        bugs1 = new Lapin();
-        bugs2 = new Lapin();
-        guillaumeT = new Archer();
-        grosBill = new Guerrier();
-        wolfie = new Loup();
         monde = new char [20][20];
-        objets = new Objet[20][20];
+        objetMap = new Objet[20][20];
         creatures = new Creature[20][20];
-        potion1 = new PotionSoin();
-        potion2 = new PotionSoin();
-        potion3 = new PotionSoin();
+        
+        personnages = new ArrayList<>();
+        monstres = new ArrayList<>();
+        objets = new ArrayList<>();
+        
     }
 
     //positionne les personnages de maniere aleatoire
+
+    /**
+     * Etant donne une creature, la assigne une position aleatoire dans le monde
+     * @param c
+     */
     public void creerCreature(Creature c) {
         Random generateurAleatoire = new Random();
         int entierAleaX = 0;
@@ -91,58 +86,86 @@ public class World {
         
         o.setMonde(this);
         o.setPos(position);
+        this.setObjetMap(o, entierAleaX, entierAleaY);
         
         if (o instanceof PotionSoin) {
             monde[entierAleaX][entierAleaY] = 'X';            
         } else if (o instanceof Epee) {
             monde[entierAleaX][entierAleaY] = 'E';
         }             
-        objets[entierAleaX][entierAleaY] = o;
     }
     
     public void creerObjet(PotionSoin o, int force) {
         creerObjet(o);
         o.setForce(force);
     }
+    
+    /**
+     *Cree la matrice du monde vide et apres la remplis avec des personnages
+     * @param nbArcher nombre d'Archers dans le jeu
+     * @param nbPaysan nombre de Paysans dans le jeu
+     * @param nbGuerrier nombre de Guerriers dans le jeu
+     * @param nbLapin nombre de Lapins dans le jeu
+     * @param nbLoup nombre de Loups dans le jeu
+     * @param nbEpees nombre d'Epees dans le jeu
+     * @param nbPotions nombre de Potions dans le jeu
+     */
+    public void creerMondeAlea(int nbArcher, int nbPaysan, int nbGuerrier, int nbLapin, int nbLoup, int nbEpee, int nbPotion){
         
-    public void creerMondeAlea(){
-        
+        //Creer la matrix vide
         for(int i = 0; i<20; i++){
             for (int j = 0 ; j<20; j++){
                 monde[i][j] = '0';
             }
         }
         
-                
-        // Création robin
-        creerCreature(robin);
-        robin.setNom("robin");
+        //Creer les objets du type personnage et les placer dans le array
+        for(int i = 0; i < nbArcher; i++){
+            Archer nouvelArcher = new Archer();
+            creerCreature(nouvelArcher);
+            personnages.add(nouvelArcher);
+            
+        }
         
-        // Création peon
-        creerCreature(peon);
-        peon.setNom("peon");
+        for(int i = 0; i < nbPaysan; i++){
+            Paysan nouveauPaysan = new Paysan();
+            creerCreature(nouveauPaysan);
+            personnages.add(nouveauPaysan);
+            
+        }
         
-        // Création bugs1
-        creerCreature(bugs1);
-
-        // Création bugs2
-        creerCreature(bugs2);
+        for(int i = 0; i < nbGuerrier; i++){
+            Guerrier nouveauGuerrier = new Guerrier();
+            creerCreature(nouveauGuerrier);
+            personnages.add(nouveauGuerrier);
+            
+        }
         
-        // Création guillaumeT
-        creerCreature(guillaumeT);
-        guillaumeT.setNom("guillaumeT");
+        //Creer les objets du type Monstre et les placer dans le array
+        for (int i = 0; i < nbLapin; i++){
+            Lapin nouveauLapin = new Lapin();
+            creerCreature(nouveauLapin);
+            monstres.add(nouveauLapin);
+        }
         
-        // Création grosBill
-        creerCreature(grosBill);
+        for (int i = 0; i < nbLoup; i++){
+            Loup nouveauLoup = new Loup();
+            creerCreature(nouveauLoup);
+            monstres.add(nouveauLoup);
+        }
         
-        // Création wolfie
-        creerCreature(wolfie);
+        //Creer les objets du type Objet et les placer dans le array
+        for (int i = 0; i < nbEpee; i++){
+            Epee nouvelEpee = new Epee();
+            creerObjet(nouvelEpee);
+            objets.add(nouvelEpee);
+        }
         
-        // Création potions
-        creerObjet(potion1, 10);
-        creerObjet(potion2, 20);
-        creerObjet(potion3, 30);
-        
+        for (int i = 0; i < nbPotion; i++){
+            PotionSoin nouvellePotion = new PotionSoin();
+            creerObjet(nouvellePotion);
+            objets.add(nouvellePotion);
+        }
     }
 
     public char[][] getMonde() {
@@ -162,12 +185,12 @@ public class World {
         } 
     }
     
-    public Objet[][] getObjets() {
-        return objets;
+    public Objet[][] getObjetMap() {
+        return objetMap;
     }
 
-    public void setObjets(Objet o, int x, int y) {
-        this.objets[x][y] = o;
+    public void setObjetMap(Objet o, int x, int y) {
+        this.objetMap[x][y] = o;
     }
     
     public Creature[][] getCreatures() {
@@ -177,6 +200,47 @@ public class World {
     public void setCreatures(Creature c) {
         this.creatures[c.getPos().getX()][c.getPos().getY()] = c;
     }
+
+    public ArrayList<Personnage> getPersonnages() {
+        return personnages;
+    }
+
+    public void setPersonnages(ArrayList<Personnage> personnages) {
+        this.personnages = personnages;
+    }
+
+    public ArrayList<Monstre> getMonstres() {
+        return monstres;
+    }
+
+    public void setMonstres(ArrayList<Monstre> monstres) {
+        this.monstres = monstres;
+    }
+
+    public ArrayList<Objet> getObjets() {
+        return objets;
+    }
+
+    public void setObjets(ArrayList<Objet> objets) {
+        this.objets = objets;
+    }
+    
+    public void afficheListePersonnage(){
+        System.out.println("Liste de personnages : ");
+        for(int i = 0; i < personnages.size(); i++){
+            personnages.get(i).affiche();
+        }
+    }
+    
+    public void afficheListeMonstre(){
+        System.out.println("Liste de Monstres : ");
+        for(int i = 0; i < monstres.size(); i++){
+            monstres.get(i).affiche();
+        }
+    }
+    
     
 }
+    
+    
     

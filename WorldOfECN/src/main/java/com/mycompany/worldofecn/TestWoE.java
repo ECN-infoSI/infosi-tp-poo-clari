@@ -4,6 +4,8 @@
  */
 package com.mycompany.worldofecn;
 
+import java.util.Random;
+
 /**
  *
  * @author User
@@ -11,8 +13,37 @@ package com.mycompany.worldofecn;
 public class TestWoE {
     public static void main(String[] args) {
         World monMonde = new World();
-        monMonde.creerMondeAlea();
-                        
+        
+        int nbArcher , nbPaysan , nbGuerrier , nbLapin, nbLoup , nbEpee, nbPotion;
+        
+        
+        //Illustrez le bon fonctionnement de votre solution en créant un nombre tiré
+        //aléatoirement (nombre différent pour chaque « type » de Personnage) de :
+        
+        Random generateurAleatoire = new Random();
+        
+        nbArcher = generateurAleatoire.nextInt(20);
+        nbPaysan = generateurAleatoire.nextInt(20);
+        nbGuerrier = generateurAleatoire.nextInt(20);
+        nbLapin = generateurAleatoire.nextInt(20);
+        nbLoup = generateurAleatoire.nextInt(20);
+        nbEpee = generateurAleatoire.nextInt(20);
+        nbPotion = generateurAleatoire.nextInt(20);
+        
+        System.out.println("nbArcher = " + nbArcher);
+        System.out.println("nbPaysan = " + nbPaysan);
+        System.out.println("nbGuerrier = " + nbGuerrier);
+        System.out.println("nbLapin = " + nbLapin);
+        System.out.println("nbLoup = " + nbLoup);
+        System.out.println("nbEpees = " + nbEpee);
+        System.out.println("nbPotions = " + nbPotion);
+        
+        monMonde.creerMondeAlea(nbArcher, nbPaysan, nbGuerrier, nbLapin, nbLoup, nbEpee, nbPotion);
+        
+        monMonde.afficheListePersonnage();
+        monMonde.afficheListeMonstre();
+        
+        /*
         //Test setters
         monMonde.peon.setPtVie(10);
         
@@ -65,7 +96,7 @@ public class TestWoE {
         //monMonde.robin.affiche();
         //monMonde.bugs1.affiche();
        
-        /*
+        
         monMonde.robin.affiche();
         monMonde.bugs1.affiche();
         monMonde.bugs2.affiche();
@@ -73,7 +104,7 @@ public class TestWoE {
         monMonde.grosBill.affiche();
         monMonde.wolfie.affiche();
         monMonde.guillaumeT.affiche();
-        */
+        
         System.out.println("Distance entre Wolfie et Paysan: "+ monMonde.peon.getPos().distance(monMonde.wolfie.getPos()));
         
         
@@ -170,5 +201,6 @@ public class TestWoE {
         
         
         //Afficher le monde avec des potions soin
+*/
     } 
 }

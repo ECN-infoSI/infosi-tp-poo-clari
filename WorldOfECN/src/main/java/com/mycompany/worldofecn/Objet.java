@@ -42,14 +42,14 @@ public abstract class Objet {
     public void setPos(Point2D pos) {
         if ((this.getMonde() != null) && (this.pos != null)) {
             this.monde.getMonde()[this.pos.getX()][this.pos.getY()] = '0';
-            this.getMonde().getObjets()[this.getPos().getX()][this.getPos().getY()] = null;
+            this.getMonde().getObjetMap()[this.getPos().getX()][this.getPos().getY()] = null;
         }
         this.pos = pos;
     }
 
     public void disparaitre() {
         //this.monde.getMonde()[pos.getX()][pos.getY()] = '0'; //precisa? Ou vai ter o heroi em cima ja?
-        this.monde.getObjets()[pos.getX()][pos.getY()] = null;
+        this.monde.getObjetMap()[pos.getX()][pos.getY()] = null;
     }
       
    

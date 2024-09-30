@@ -43,7 +43,7 @@ public class PotionSoin extends Objet {
         super.setPos(pos);
         if (this.getMonde() != null) {
             this.getMonde().getMonde()[this.getPos().getX()][this.getPos().getY()] = 'X';
-            this.getMonde().getObjets()[this.getPos().getX()][this.getPos().getY()] = this;
+            this.getMonde().getObjetMap()[this.getPos().getX()][this.getPos().getY()] = this;
         }
     }
 }

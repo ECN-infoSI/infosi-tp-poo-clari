@@ -6,7 +6,7 @@ package com.mycompany.worldofecn;
 
 /**
  *
- * @author Clara
+ * @author Clara et Larissa
  */
 public class Epee extends Objet {
     
