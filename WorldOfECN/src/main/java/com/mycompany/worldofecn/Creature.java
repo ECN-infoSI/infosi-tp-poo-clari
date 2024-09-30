@@ -89,10 +89,11 @@ public abstract class Creature {
     }
 
     public void setPos(Point2D pos) {
-        if (monde != null) {
+        if (this.pos != null) {
             monde.monde[this.pos.getX()][this.pos.getY()]= '0';
-        }
+            this.monde.getCreatures()[this.pos.getX()][this.pos.getY()] = null;  } 
         this.pos = pos;
+        this.monde.getCreatures()[this.pos.getX()][this.pos.getY()] = this;
     }
 
     public World getMonde() {
@@ -109,6 +110,7 @@ public abstract class Creature {
         int mouvement;
         boolean bouge = false;
         monde.monde[pos.getX()][pos.getY()]= '0';
+        this.monde.getCreatures()[this.pos.getX()][this.pos.getY()] = null;
         
         while (bouge == false) {
             mouvement = randomise.nextInt(8);
@@ -140,6 +142,7 @@ public abstract class Creature {
                 default:
                     pos.translate(0,0);
             }
+            this.monde.getCreatures()[this.pos.getX()][this.pos.getY()] = this;
         }
     }
     

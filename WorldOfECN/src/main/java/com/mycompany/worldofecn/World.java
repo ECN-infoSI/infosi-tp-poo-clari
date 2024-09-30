@@ -57,8 +57,8 @@ public class World {
         position.setX(entierAleaX);
         position.setY(entierAleaY);
         
-        c.setPos(position);
         c.setMonde(this);
+        c.setPos(position);
         this.setCreatures(c);
         
         if (c instanceof Archer) {
@@ -89,8 +89,8 @@ public class World {
         position.setX(entierAleaX);
         position.setY(entierAleaY);
         
-        o.setPos(position);
         o.setMonde(this);
+        o.setPos(position);
         
         if (o instanceof PotionSoin) {
             monde[entierAleaX][entierAleaY] = 'X';            
@@ -177,5 +177,6 @@ public class World {
     public void setCreatures(Creature c) {
         this.creatures[c.getPos().getX()][c.getPos().getY()] = c;
     }
+    
 }
     

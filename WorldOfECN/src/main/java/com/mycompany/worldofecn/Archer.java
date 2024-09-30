@@ -30,8 +30,7 @@ public class Archer extends Personnage {
     @Override
     public void setPos(Point2D pos) {
         super.setPos(pos);
-        if (this.getMonde() != null){
-            this.getMonde().monde[pos.getX()][pos.getY()]= 'A';}
+        this.getMonde().monde[pos.getX()][pos.getY()]= 'A';
     }
 
     @Override
