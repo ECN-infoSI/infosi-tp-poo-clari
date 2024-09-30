@@ -22,6 +22,8 @@ public class World {
     public PotionSoin potion2;
     public PotionSoin potion3;
     public Objet[][] objets;
+    public Creature[][] creatures;
+
     
     //methodes
     public World(){
@@ -34,6 +36,7 @@ public class World {
         wolfie = new Loup();
         monde = new char [20][20];
         objets = new Objet[20][20];
+        creatures = new Creature[20][20];
         potion1 = new PotionSoin();
         potion2 = new PotionSoin();
         potion3 = new PotionSoin();
@@ -56,6 +59,7 @@ public class World {
         
         c.setPos(position);
         c.setMonde(this);
+        this.setCreatures(c);
         
         if (c instanceof Archer) {
             monde[entierAleaX][entierAleaY] = 'A';
@@ -166,5 +170,12 @@ public class World {
         this.objets[x][y] = o;
     }
     
+    public Creature[][] getCreatures() {
+        return creatures;
+    }
+
+    public void setCreatures(Creature c) {
+        this.creatures[c.getPos().getX()][c.getPos().getY()] = c;
+    }
 }
     
