@@ -6,6 +6,7 @@ package com.mycompany.worldofecn;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Iterator;
 
 /**
  *
@@ -31,8 +32,8 @@ public class TestWoE {
         nbArcher = 20;
         nbPaysan = 20;
         nbGuerrier = 20;
-        nbLapin = 20;
-        nbLoup = 20;
+        nbLapin = 1000;
+        nbLoup = 0;
         nbEpee = 5;
         nbPotion = 5;
        
@@ -58,6 +59,27 @@ public class TestWoE {
         System.out.println("-----");
         System.out.println("ptVieTotal pour "+ (person.size()) + " personnages = "+ ptVieTotal);
         */
+      
+        //Tester les differents iterateurs 
+        long debutN = System.nanoTime();
+        
+        ArrayList<Monstre> monsterArray;
+        monsterArray = monMonde.getMonstres();
+        
+        //test parcours de liste par size()
+        for(int i = 0; i < monsterArray.size(); i++){
+            Monstre p;
+            p = (monsterArray.get(i));
+        }
+        
+        //test parcours de liste par l'iterateur()
+        Iterator<Monstre> listIt = monsterArray.iterator();
+        while(listIt.hasNext()) {
+            Monstre p = listIt.next();
+        }
+        
+        long finN = System.nanoTime();
+        System.out.println("Temps ecoule en ns: " + (finN - debutN));
         
         /*
         //Test setters
