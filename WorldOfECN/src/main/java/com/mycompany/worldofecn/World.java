@@ -345,6 +345,12 @@ public class World {
         }
     }
     
+    public void afficheListeObjet(){
+        System.out.println("Liste de Objets : ");
+        for(int i = 0; i < objets.size(); i++){
+            objets.get(i).affiche();
+        }
+    }
     
 }
     
