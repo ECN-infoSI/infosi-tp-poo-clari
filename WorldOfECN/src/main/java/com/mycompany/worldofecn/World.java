@@ -12,19 +12,51 @@ import java.util.ArrayList;
  * @param
  */
 public class World {
+
+    /**
+     *
+     */
     public char[][] monde;
+
+    /**
+     *
+     */
     public Objet[][] objetMap;
     
+    /**
+     *
+     */
     public Creature[][] creatures;
-    public ArrayList<Personnage> personnages;
-    public ArrayList<Monstre> monstres;
-    public ArrayList<Objet> objets;
 
+    /**
+     *
+     */
+    public ArrayList<Personnage> personnages;
+
+    /**
+     *
+     */
+    public ArrayList<Monstre> monstres;
+
+    /**
+     *
+     */
+    public ArrayList<Objet> objets;
+    
+    /**
+     *
+     */
+    public  static  final  int taille =  50; 
+    
     //methodes
+
+    /**
+     *
+     */
     public World(){
-        monde = new char [20][20];
-        objetMap = new Objet[20][20];
-        creatures = new Creature[20][20];
+        monde = new char [taille][taille];
+        objetMap = new Objet[taille][taille];
+        creatures = new Creature[taille][taille];
         
         personnages = new ArrayList<>();
         monstres = new ArrayList<>();
@@ -42,18 +74,22 @@ public class World {
         Random generateurAleatoire = new Random();
         int entierAleaX = 0;
         int entierAleaY = 0;
+        int AleaPtVie = 0;
         
         do{
-            entierAleaX = generateurAleatoire.nextInt(20);
-            entierAleaY = generateurAleatoire.nextInt(20);
+            entierAleaX = generateurAleatoire.nextInt(taille);
+            entierAleaY = generateurAleatoire.nextInt(taille);
         }while(monde[entierAleaX][entierAleaY] != '0');
         
         Point2D position = new Point2D();
         position.setX(entierAleaX);
         position.setY(entierAleaY);
         
+        AleaPtVie = generateurAleatoire.nextInt(100);
+        
         c.setMonde(this);
         c.setPos(position);
+        c.setPtVie(AleaPtVie);
         this.setCreatures(c);
         
         if (c instanceof Archer) {
@@ -70,14 +106,18 @@ public class World {
             
     }
     
+    /**
+     *
+     * @param o
+     */
     public void creerObjet(Objet o) {
         Random generateurAleatoire = new Random();
         int entierAleaX = 0;
         int entierAleaY = 0;
         
         do{
-            entierAleaX = generateurAleatoire.nextInt(20);
-            entierAleaY = generateurAleatoire.nextInt(20);
+            entierAleaX = generateurAleatoire.nextInt(taille);
+            entierAleaY = generateurAleatoire.nextInt(taille);
         }while(monde[entierAleaX][entierAleaY] != '0');
         
         Point2D position = new Point2D();
@@ -95,6 +135,11 @@ public class World {
         }             
     }
     
+    /**
+     *
+     * @param o
+     * @param force
+     */
     public void creerObjet(PotionSoin o, int force) {
         creerObjet(o);
         o.setForce(force);
@@ -107,14 +152,14 @@ public class World {
      * @param nbGuerrier nombre de Guerriers dans le jeu
      * @param nbLapin nombre de Lapins dans le jeu
      * @param nbLoup nombre de Loups dans le jeu
-     * @param nbEpees nombre d'Epees dans le jeu
-     * @param nbPotions nombre de Potions dans le jeu
+     * @param nbEpee
+     * @param nbPotion
      */
     public void creerMondeAlea(int nbArcher, int nbPaysan, int nbGuerrier, int nbLapin, int nbLoup, int nbEpee, int nbPotion){
         
         //Creer la matrix vide
-        for(int i = 0; i<20; i++){
-            for (int j = 0 ; j<20; j++){
+        for(int i = 0; i<taille; i++){
+            for (int j = 0 ; j<taille; j++){
                 monde[i][j] = '0';
             }
         }
@@ -168,63 +213,121 @@ public class World {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public char[][] getMonde() {
         return monde;
     }
 
+    /**
+     *
+     */
     public void tourDeJeu() {
         
     }
     
+    /**
+     *
+     */
     public void afficheWorld() {
-        for(int i = 0; i<20; i++){
-            for (int j = 0 ; j<20; j++){
+        for(int i = 0; i<taille; i++){
+            for (int j = 0 ; j<taille; j++){
                 System.out.print(monde[i][j] + " ");
             }
             System.out.println();
         } 
     }
     
+    /**
+     *
+     * @return
+     */
     public Objet[][] getObjetMap() {
         return objetMap;
     }
 
+    /**
+     *
+     * @param o
+     * @param x
+     * @param y
+     */
     public void setObjetMap(Objet o, int x, int y) {
         this.objetMap[x][y] = o;
     }
     
+    /**
+     *
+     * @return
+     */
     public Creature[][] getCreatures() {
         return creatures;
     }
 
+    public Creature getCreatures(Point2D p) {
+        return creatures[p.getX()][p.getY()];
+    }
+    /**
+     *
+     * @param c
+     */
     public void setCreatures(Creature c) {
         this.creatures[c.getPos().getX()][c.getPos().getY()] = c;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Personnage> getPersonnages() {
         return personnages;
     }
 
+    /**
+     *
+     * @param personnages
+     */
     public void setPersonnages(ArrayList<Personnage> personnages) {
         this.personnages = personnages;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Monstre> getMonstres() {
         return monstres;
     }
 
+    /**
+     *
+     * @param monstres
+     */
     public void setMonstres(ArrayList<Monstre> monstres) {
         this.monstres = monstres;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Objet> getObjets() {
         return objets;
     }
 
+    /**
+     *
+     * @param objets
+     */
     public void setObjets(ArrayList<Objet> objets) {
         this.objets = objets;
     }
     
+    /**
+     *
+     */
     public void afficheListePersonnage(){
         System.out.println("Liste de personnages : ");
         for(int i = 0; i < personnages.size(); i++){
@@ -232,6 +335,9 @@ public class World {
         }
     }
     
+    /**
+     *
+     */
     public void afficheListeMonstre(){
         System.out.println("Liste de Monstres : ");
         for(int i = 0; i < monstres.size(); i++){

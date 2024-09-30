@@ -10,18 +10,41 @@ package com.mycompany.worldofecn;
  */
 public class Paysan extends Personnage {
     
+    /**
+     *
+     * @param n
+     * @param pV
+     * @param dA
+     * @param pPar
+     * @param paAtt
+     * @param paPar
+     * @param dMax
+     * @param p
+     * @param monde
+     */
     public Paysan(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p, World monde) {
        super(n, pV, dA, pPar, paAtt, paPar, dMax, p, monde) ;
     }
     
+    /**
+     *
+     * @param p
+     */
     public Paysan (Paysan p) {
         this(p.getNom(), p.getPtVie(), p.getDegAtt(), p.getPtPar(), p.getPageAtt(), p.getPagePar(), p.getDistAttMax(), new Point2D(p.getPos()), p.getMonde());
     }
     
+    /**
+     *
+     */
     public Paysan(){
         super();
     }
     
+    /**
+     *
+     * @param pos
+     */
     @Override
     public void setPos(Point2D pos) {
         super.setPos(pos);
@@ -29,6 +52,9 @@ public class Paysan extends Personnage {
             this.getMonde().monde[pos.getX()][pos.getY()]= 'P';}
     }
     
+    /**
+     *
+     */
     @Override
     public void deplace() {
         super.deplace();

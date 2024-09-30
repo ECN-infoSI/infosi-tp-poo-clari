@@ -4,6 +4,7 @@
  */
 package com.mycompany.worldofecn;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -11,6 +12,11 @@ import java.util.Random;
  * @author User
  */
 public class TestWoE {
+
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         World monMonde = new World();
         
@@ -22,14 +28,15 @@ public class TestWoE {
         
         Random generateurAleatoire = new Random();
         
-        nbArcher = generateurAleatoire.nextInt(20);
-        nbPaysan = generateurAleatoire.nextInt(20);
-        nbGuerrier = generateurAleatoire.nextInt(20);
-        nbLapin = generateurAleatoire.nextInt(20);
-        nbLoup = generateurAleatoire.nextInt(20);
-        nbEpee = generateurAleatoire.nextInt(20);
-        nbPotion = generateurAleatoire.nextInt(20);
-        
+        nbArcher = 20;
+        nbPaysan = 20;
+        nbGuerrier = 20;
+        nbLapin = 20;
+        nbLoup = 20;
+        nbEpee = 5;
+        nbPotion = 5;
+       
+        /*
         System.out.println("nbArcher = " + nbArcher);
         System.out.println("nbPaysan = " + nbPaysan);
         System.out.println("nbGuerrier = " + nbGuerrier);
@@ -37,11 +44,20 @@ public class TestWoE {
         System.out.println("nbLoup = " + nbLoup);
         System.out.println("nbEpees = " + nbEpee);
         System.out.println("nbPotions = " + nbPotion);
-        
+        */
         monMonde.creerMondeAlea(nbArcher, nbPaysan, nbGuerrier, nbLapin, nbLoup, nbEpee, nbPotion);
         
-        monMonde.afficheListePersonnage();
-        monMonde.afficheListeMonstre();
+        /*
+        ArrayList<Personnage> person = monMonde.getPersonnages();
+        int ptVieTotal = 0;
+        for (int i = 0; i < person.size(); i++) {
+            System.out.println("ptVie du Personnage " + i + " = "+ person.get(i).getPtVie());
+            ptVieTotal += person.get(i).getPtVie();
+            
+        }
+        System.out.println("-----");
+        System.out.println("ptVieTotal pour "+ (person.size()) + " personnages = "+ ptVieTotal);
+        */
         
         /*
         //Test setters
@@ -202,5 +218,27 @@ public class TestWoE {
         
         //Afficher le monde avec des potions soin
 */
+        System.out.println("Monde initiaux: ");
+        monMonde.afficheWorld();
+        System.out.println("-----");
+        
+        ArrayList<Personnage> person = monMonde.getPersonnages();
+        for (int i = 0; i < person.size(); i++) {
+            person.get(i).deplace();
+        }
+        
+        System.out.println("Monde après le déplacement de tous les protagonistes: ");
+        monMonde.afficheWorld();
+        System.out.println("-----");
+        
+        ArrayList<Monstre> monstres = monMonde.getMonstres();
+        for (int i = 0; i < monstres.size(); i++) {
+            monstres.get(i).deplace();
+        }
+        
+        System.out.println("Monde après le déplacement de tous les montres: ");
+        monMonde.afficheWorld();
+        System.out.println("-----");
+        
     } 
 }

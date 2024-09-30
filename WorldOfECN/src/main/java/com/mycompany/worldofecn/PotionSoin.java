@@ -11,33 +11,61 @@ package com.mycompany.worldofecn;
 public class PotionSoin extends Objet {
     private int force;
 
+    /**
+     *
+     * @param p
+     * @param m
+     * @param force
+     */
     public PotionSoin (Point2D p, World m, int force) {
         super(p, m);
         this.force = force;
     }
     
+    /**
+     *
+     * @param p
+     */
     public PotionSoin (PotionSoin p) {
         super(p);
         this.force = p.getForce();
     }
     
+    /**
+     *
+     */
     public PotionSoin () {
         super();
         this.force = 0;
     }
     
+    /**
+     *
+     */
     public void PotionSoin () {
         this.force = 0;
     }
     
+    /**
+     *
+     * @return
+     */
     public int getForce() {
         return force;
     }
 
+    /**
+     *
+     * @param force
+     */
     public void setForce(int force) {
         this.force = force;
     }
     
+    /**
+     *
+     * @param pos
+     */
     @Override
     public void setPos(Point2D pos) {
         super.setPos(pos);

@@ -13,26 +13,51 @@ import java.util.Random;
 public class Loup extends Monstre {
     
     //Constructeurs
+
+    /**
+     *
+     * @param pV
+     * @param dA
+     * @param pPar
+     * @param paAtt
+     * @param paPar
+     * @param p
+     * @param monde
+     */
     public Loup(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p, World monde){
         super(pV, dA, pPar, paAtt, paPar, p, monde);
     }
     
+    /**
+     *
+     * @param p
+     */
     public Loup(Loup p){
         this(p.getPtVie(), p.getDegAtt(),
                 p.getPtPar(), p.getPageAtt(),
                 p.getPagePar(), new Point2D(p.getPos()), p.getMonde());
     }
     
+    /**
+     *
+     */
     public Loup(){
         super();
     }
     
+    /**
+     *
+     */
     @Override
     public void deplace() {
         super.deplace();
         this.getMonde().monde[this.getPos().getX()][this.getPos().getY()]= 'W';
     }
     
+    /**
+     *
+     * @param pos
+     */
     @Override
     public void setPos(Point2D pos) {
         super.setPos(pos);
@@ -41,6 +66,11 @@ public class Loup extends Monstre {
     }
     
     //Autres methodes
+
+    /**
+     *
+     * @param c
+     */
     public void combattre(Creature c){
       //Creature c est le defenseur
         //Qui appelle la methode est l'ataquant

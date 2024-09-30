@@ -9,40 +9,80 @@ import java.util.Random;
 public class Archer extends Personnage {
     private int nbFleches;
     
+    /**
+     *
+     * @param n
+     * @param pV
+     * @param dA
+     * @param pPar
+     * @param paAtt
+     * @param paPar
+     * @param dMax
+     * @param p
+     * @param nbFleches
+     * @param monde
+     */
     public Archer(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p, int nbFleches, World monde){
        super(n, pV, dA, pPar, paAtt, paPar, dMax, p, monde) ;
        this.nbFleches = 0;
     }
+
+    /**
+     *
+     * @param A
+     */
     public Archer (Archer A) {
        this(A.getNom(), A.getPtVie(), A.getDegAtt(), A.getPtPar(), A.getPageAtt(), 
                A.getPagePar(), A.getDistAttMax(), new Point2D(A.getPos()), A.getNbFleches(), A.getMonde());
     }
     
+    /**
+     *
+     */
     public Archer() {
         super();
         this.nbFleches = 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getNbFleches() {
         return nbFleches;
     }
     
+    /**
+     *
+     * @param pos
+     */
     @Override
     public void setPos(Point2D pos) {
         super.setPos(pos);
         this.getMonde().monde[pos.getX()][pos.getY()]= 'A';
     }
 
+    /**
+     *
+     */
     @Override
     public void deplace() {
         super.deplace();
         this.getMonde().monde[this.getPos().getX()][this.getPos().getY()]= 'A';
     }
     
+    /**
+     *
+     * @param nbFleches
+     */
     public void setNbFleches(int nbFleches) {
         this.nbFleches = nbFleches;
     }
     
+    /**
+     *
+     * @param c
+     */
     public void combattre(Creature c){
         int tirage, nouveauPtVie;
         float distance;

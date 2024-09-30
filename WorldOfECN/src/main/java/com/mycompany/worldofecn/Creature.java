@@ -20,6 +20,17 @@ public abstract class Creature {
     private World monde;
     
     //Constructeurs
+
+    /**
+     *
+     * @param pV
+     * @param dA
+     * @param pPar
+     * @param paAtt
+     * @param paPar
+     * @param p
+     * @param monde
+     */
     public Creature(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p, World monde){
         this.ptVie = pV;
         this.degAtt = dA;
@@ -30,6 +41,10 @@ public abstract class Creature {
         this.monde = monde;
     }
     
+    /**
+     *
+     * @param c
+     */
     public Creature(Creature c){
         this(c.getPtVie(),
              c.getDegAtt(), c.getPtPar(),
@@ -39,55 +54,107 @@ public abstract class Creature {
         );
     }
     
+    /**
+     *
+     */
     public Creature(){
         this(0,0,0,0,0,null,null);
     }
     
     //Getters and setters
+
+    /**
+     *
+     * @return
+     */
     public int getPtVie() {
         return ptVie;
     }
 
+    /**
+     *
+     * @param ptVie
+     */
     public void setPtVie(int ptVie) {
         this.ptVie = ptVie;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getDegAtt() {
         return degAtt;
     }
 
+    /**
+     *
+     * @param degAtt
+     */
     public void setDegAtt(int degAtt) {
         this.degAtt = degAtt;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPtPar() {
         return ptPar;
     }
 
+    /**
+     *
+     * @param ptPar
+     */
     public void setPtPar(int ptPar) {
         this.ptPar = ptPar;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPageAtt() {
         return pageAtt;
     }
 
+    /**
+     *
+     * @param pageAtt
+     */
     public void setPageAtt(int pageAtt) {
         this.pageAtt = pageAtt;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPagePar() {
         return pagePar;
     }
 
+    /**
+     *
+     * @param pagePar
+     */
     public void setPagePar(int pagePar) {
         this.pagePar = pagePar;
     }
 
+    /**
+     *
+     * @return
+     */
     public Point2D getPos() {
         return pos;
     }
 
+    /**
+     *
+     * @param pos
+     */
     public void setPos(Point2D pos) {
         if (this.pos != null) {
             monde.monde[this.pos.getX()][this.pos.getY()]= '0';
@@ -96,61 +163,95 @@ public abstract class Creature {
         this.monde.getCreatures()[this.pos.getX()][this.pos.getY()] = this;
     }
 
+    /**
+     *
+     * @return
+     */
     public World getMonde() {
         return monde;
     }
 
+    /**
+     *
+     * @param monde
+     */
     public void setMonde(World monde) {
         this.monde = monde;
     }
     
-    
+    /**
+     *
+     */
     public void deplace(){
         Random randomise = new Random();
         int mouvement;
+        int dx = 0;
+        int dy = 0;
         boolean bouge = false;
         monde.monde[pos.getX()][pos.getY()]= '0';
         this.monde.getCreatures()[this.pos.getX()][this.pos.getY()] = null;
         
         while (bouge == false) {
             mouvement = randomise.nextInt(8);
+            
+            //bouge = (pos.translate(0, 1, 0) != null) && this.monde.getCreatures(pos.translate(0, 1, 0)) == null;
+       
             switch (mouvement) {
                 case 0:
-                    bouge = pos.translate(0, 1);
+                    dx = 0;
+                    dy = 1;  
                     break;
                 case 1:
-                    bouge = pos.translate(0, -1);
+                    dx = 0;
+                    dy = -1; 
                     break;
                 case 2:
-                    bouge = pos.translate(1, 0);
+                    dx = 1;
+                    dy = 0; 
                     break;
                 case 3:
-                    bouge = pos.translate(-1, 0);
+                    dx = -1;
+                    dy = 0; 
                     break;
                 case 4:
-                    bouge = pos.translate(1, 1);
+                    dx = 1;
+                    dy = 1; 
                     break;
                 case 5:
-                    bouge = pos.translate(1, -1);
+                    dx = 1;
+                    dy = -1; 
                     break;
                 case 6:
-                    bouge = pos.translate(-1, 1);
+                    dx = -1;
+                    dy = 1; 
                     break;
                 case 7:
-                    bouge = pos.translate(-1, -1);
+                    dx = -1;
+                    dy = -1; 
                     break;
                 default:
-                    pos.translate(0,0);
+                    dx = 0;
+                    dy = 0; 
+                    pos.translate(0,0, 0);
             }
-            this.monde.getCreatures()[this.pos.getX()][this.pos.getY()] = this;
+            bouge = (pos.translate(dx, dy, 0) != null) && this.monde.getCreatures(pos.translate(dx, dy, 0)) == null;    
         }
+        this.setPos(pos.translate(dx, dy, 0));
+        this.monde.getCreatures()[this.pos.getX()][this.pos.getY()] = this;
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Creature{" + "ptVie=" + ptVie + ", degAtt=" + degAtt + ", ptPar=" + ptPar + ", pageAtt=" + pageAtt + ", pagePar=" + pagePar + ", pos=" + pos + ", monde=" + monde + '}';
     }
     
+    /**
+     *
+     */
     public void affiche(){
         System.out.println(this.toString());
     }

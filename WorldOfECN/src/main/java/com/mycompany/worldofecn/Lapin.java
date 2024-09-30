@@ -10,10 +10,25 @@ package com.mycompany.worldofecn;
  */
 public class Lapin extends Monstre {
     //constructeurs
+
+    /**
+     *
+     * @param pV
+     * @param dA
+     * @param pPar
+     * @param paAtt
+     * @param paPar
+     * @param p
+     * @param monde
+     */
     public Lapin(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p, World monde){
         super(pV, dA, pPar, paAtt, paPar, p, monde);
     }
     
+    /**
+     *
+     * @param l
+     */
     public Lapin(Lapin l){
         this(l.getPtVie(),
              l.getDegAtt(),
@@ -25,10 +40,17 @@ public class Lapin extends Monstre {
         );
     }
     
+    /**
+     *
+     */
     public Lapin(){
         super();
     }
     
+    /**
+     *
+     * @param pos
+     */
     @Override
     public void setPos(Point2D pos) {
         super.setPos(pos);
@@ -36,6 +58,9 @@ public class Lapin extends Monstre {
             this.getMonde().monde[pos.getX()][pos.getY()]= 'L';}
     }
     
+    /**
+     *
+     */
     @Override
     public void deplace() {
         super.deplace();
