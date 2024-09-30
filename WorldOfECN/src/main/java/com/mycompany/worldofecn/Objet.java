@@ -82,6 +82,15 @@ public abstract class Objet {
         //this.monde.getMonde()[pos.getX()][pos.getY()] = '0'; //precisa? Ou vai ter o heroi em cima ja?
         this.monde.getObjetMap()[pos.getX()][pos.getY()] = null;
     }
-      
+    
+    @Override
+    public String toString() {
+        return "Objet{" + "pos=" + pos + ", monde=" + monde + '}';
+    }
+    
+    public void affiche(){
+        System.out.println(this.toString());
+    }
+
    
 }

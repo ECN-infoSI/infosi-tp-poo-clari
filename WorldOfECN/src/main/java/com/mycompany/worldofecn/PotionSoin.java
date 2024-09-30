@@ -74,4 +74,16 @@ public class PotionSoin extends Objet {
             this.getMonde().getObjetMap()[this.getPos().getX()][this.getPos().getY()] = this;
         }
     }
+    
+    @Override
+    public String toString() {
+        return super.toString() + "PotionSoin{" + "force=" + force + '}';
+    }
+
+    
+    @Override
+    public void affiche() {
+        System.out.println(this.toString());
+    }
+
 }

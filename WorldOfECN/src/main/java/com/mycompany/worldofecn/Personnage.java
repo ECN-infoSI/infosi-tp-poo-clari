@@ -97,7 +97,7 @@ public class Personnage extends Creature{
      */
     @Override
     public void affiche() {
-        System.out.println(this.toString() + super.toString());
+        System.out.println(this.toString());
     }
     
     /**
