@@ -6,7 +6,7 @@ import java.util.Random;
  *
  * @author Clara et Larissa
  */
-public class Archer extends Personnage {
+public class Archer extends Personnage implements Combattant, Deplacable {
     private int nbFleches;
     
     /**
