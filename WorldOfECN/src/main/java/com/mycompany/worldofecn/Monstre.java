@@ -8,7 +8,7 @@ package com.mycompany.worldofecn;
  *
  * @author Larissa ALBUQUERQUE NOGUEIRA et Clara MATTOS MEDEIROS
  */
-public class Monstre extends Creature {
+public abstract class Monstre extends Creature {
     
     /**
      *
