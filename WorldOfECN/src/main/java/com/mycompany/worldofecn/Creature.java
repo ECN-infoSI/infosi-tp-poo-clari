@@ -10,7 +10,7 @@ import java.util.Random;
  *
  * @author Larissa et Clara
  */
-public abstract class Creature {
+public abstract class Creature implements Deplacable {
     private int ptVie;
     private int degAtt;
     private int ptPar;
@@ -184,6 +184,7 @@ public abstract class Creature {
      * Deplace une creature dans le monde
      * 
      */
+    @Override
     public void deplace(){
         Random randomise = new Random();
         int dx = 0;

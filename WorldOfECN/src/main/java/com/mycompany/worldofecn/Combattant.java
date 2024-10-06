@@ -9,5 +9,5 @@ package com.mycompany.worldofecn;
  * @author User
  */
 public interface Combattant {
-    
+    public void combattre(Creature c);
 }
