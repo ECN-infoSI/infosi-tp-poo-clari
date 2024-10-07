@@ -5,6 +5,7 @@
 package com.mycompany.worldofecn;
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -220,9 +221,35 @@ public class World {
     }
 
     /**
-     * Gère le tour de jeu pour les joueurs
+     * Gère le tour de jeu: mise à jour de tous les positions de tous les creatures et objets.
+     * 
      */
     public void tourDeJeu() {
+        //Deplace tous les creatures
+        Iterator<Monstre> itMonstre = monstres.iterator();
+        while (itMonstre.hasNext()) {
+            Monstre m = itMonstre.next();
+            m.deplace();
+        }
+        
+        
+        //Deplace tous les personnages
+        Iterator<Personnage> itPersonnage = personnages.iterator();
+        while (itPersonnage.hasNext()) {
+            Personnage p = itPersonnage.next();
+            p.deplace();
+        }
+        
+        //Deplace les objets deplacables
+        Iterator<Objet> itObjet = objets.iterator();
+        while (itObjet.hasNext()) {
+            Objet o = itObjet.next();
+            if (o instanceof Deplacable){
+                NuageToxique n = (NuageToxique)o;
+                n.deplace();
+            }
+        }
+        
     }
     
     /**
@@ -243,6 +270,10 @@ public class World {
      */
     public Objet[][] getObjetMap() {
         return objetMap;
+    }
+    
+    public Objet getObjets(Point2D p){
+        return objetMap[p.getX()][p.getY()];
     }
 
     /**
@@ -349,7 +380,6 @@ public class World {
         }
     }
     
+    
 }
-    
-    
     
