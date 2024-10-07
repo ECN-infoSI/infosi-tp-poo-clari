@@ -31,13 +31,13 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
      * @param monde La carte avec toutes les positions de tous les personnages du jeu
      */
     public Creature(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p, World monde){
+        super(p, monde);
         this.ptVie = pV;
         this.degAtt = dA;
         this.ptPar = pPar;
         this.pageAtt = paAtt;
         this.pagePar = paPar;
-        this.pos = p;
-        this.monde = monde;
+        
     }
     
     /**
@@ -149,19 +149,20 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
     @Override
     public void deplace(){
         Random randomise = new Random();
+        Point2D pos = super.getPos();
         int dx = 0;
         int dy = 0;
         boolean bouge = false;
-        monde.monde[pos.getX()][pos.getY()]= '0';
-        this.monde.getCreatures()[this.pos.getX()][this.pos.getY()] = null;
+        super.getMonde().monde[pos.getX()][pos.getY()]= '0';
+        super.getMonde().getCreatures()[pos.getX()][pos.getY()] = null;
         
         while (bouge == false) {
             dx = randomise.nextInt(3) - 1;
             dy = randomise.nextInt(3)- 1;
-            bouge = (pos.translate(dx, dy, 0) != null) && this.monde.getCreatures(pos.translate(dx, dy, 0)) == null; //si creature hors le monde et il n'y a pas de creature dans la case on bouge   
+            bouge = (pos.translate(dx, dy, 0) != null) && super.getMonde().getCreatures(pos.translate(dx, dy, 0)) == null; //si creature hors le monde et il n'y a pas de creature dans la case on bouge   
         }
         this.setPos(pos.translate(dx, dy, 0)); //seta uma nova posicao
-        this.monde.getCreatures()[this.pos.getX()][this.pos.getY()] = this;
+        super.getMonde().getCreatures()[pos.getX()][pos.getY()] = this;
     }
     
     /**
