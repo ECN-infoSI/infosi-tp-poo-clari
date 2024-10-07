@@ -12,55 +12,88 @@ import java.util.Random;
  */
 public class NuageToxique extends Objet implements Deplacable, Combattant {
     /**
-    * @param dA Degats d'Attaque
+    * @param degAtt Degats d'Attaque
     **/
-    int dA;
+    int degAtt;
 
-    public NuageToxique(int dA, Point2D pos, World monde) {
+    public NuageToxique(int degAtt, Point2D pos, World monde) {
         super(pos, monde);
-        this.dA = dA;
-    }
-
-    public NuageToxique(int dA) {
-        this.dA = dA;
-    }
-
-    public NuageToxique(int dA, Objet o) {
-        super(o);
-        this.dA = dA;
+        this.degAtt = degAtt;
     }
     
+    public NuageToxique(NuageToxique n) {
+        this(n.getDegAtt(),
+             n.getPos(),
+             n.getMonde()
+        );
+    }
+    
+    public NuageToxique() {
+        this(0, null, null);
+    }
+
+    public int getDegAtt() {
+        return degAtt;
+    }
+
+    public void setDegAtt(int degAtt) {
+        this.degAtt = degAtt;
+    }
+
     /**
-    *
-    *
+    * Implemente le combat entre un nuage et un personnage: Le combat se passe seulement si le nuage est dans la meme case qu'un
+    * personnage, le cas ou le combat se fait automatiquement
+    * @param c Creature defenseur
     **/
-   @Override
-    public void deplace(){ 
-       Random randomise = new Random();
-       int dx = 0;
-       int dy = 0;
-       boolean bouge = false;
-       
-       World monde = super.getMonde();
-       Point2D pos = super.getPos();
-       
-       //set the position in O
-       monde[pos.getX()][pos.getY()] = '0';
-       
-       this.monde.getCreatures()[this.pos.getX()][this.pos.getY()] = null;
-
-       while (bouge == false) {
-           dx = randomise.nextInt(3) - 1;
-           dy = randomise.nextInt(3) - 1;
-           bouge = (pos.translate(dx, dy, 0) != null) && this.monde.getCreatures(pos.translate(dx, dy, 0)) == null; //si creature hors le monde et il n'y a pas de creature dans la case on bouge   
-       }
-       this.setPos(pos.translate(dx, dy, 0)); //seta uma nova posicao
-       this.monde.getCreatures()[this.pos.getX()][this.pos.getY()] = this;
-        
-    }
-    
     @Override
     public void combattre(Creature c){
+  
+        int nouveauPtVie = c.getPtVie() - this.degAtt;
         
+        System.out.println("Attaque par nuage toxique!");
+        c.setPtVie(nouveauPtVie);
+
+        System.out.println("Points de Vie restants: " + c.getPtVie());
+    }
+    
+   /**
+    *
+    *Deplace un nuage dans le jeu
+    **/
+   @Override
+    public void deplace(){
+        Random randomise = new Random();
+        Point2D pos = super.getPos();
+        int dx = 0;
+        int dy = 0;
+        boolean bouge = false;
+        
+        //effacer la derniere position du nuage
+        super.getMonde().monde[pos.getX()][pos.getY()]= '0';
+        super.getMonde().getObjetMap()[pos.getX()][pos.getY()] = null;
+        
+        //Bouge s'il la position est dans la taille du monde et il n'y a pas d'objet dans la case
+        while (bouge == false) {
+            dx = randomise.nextInt(3) - 1;
+            dy = randomise.nextInt(3)- 1;
+            
+            bouge = (pos.translate(dx, dy, 0) != null)
+                    && (super.getMonde().getObjets(super.getPos().translate(dx, dy, 0)) == null); 
+        }
+        
+        //seta uma nova posicao para a nuage 
+        this.setPos(pos.translate(dx, dy, 0)); 
+        super.getMonde().getObjetMap()[super.getPos().getX()][super.getPos().getY()] = this;
+        
+        //met un N s'il n'y a pas de creature dans la case:
+        if(super.getMonde().monde[pos.getX()][pos.getY()] == '0'){
+            super.getMonde().monde[pos.getX()][pos.getY()]= 'N';
+        }
+  
+        //S'il y a une creature combattant dans la case, on la combat
+        Creature c = super.getMonde().getCreatures(super.getPos());
+        if( c != null && c instanceof Combattant){
+            this.combattre(c);
+        }
     }
 }
