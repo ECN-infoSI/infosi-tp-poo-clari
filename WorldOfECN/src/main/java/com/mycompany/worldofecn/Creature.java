@@ -10,7 +10,7 @@ import java.util.Random;
  *
  * @author Larissa et Clara
  */
-public abstract class Creature implements Deplacable {
+public abstract class Creature extends ElementDeJeu implements Deplacable {
     private int ptVie;
     private int degAtt;
     private int ptPar;

@@ -5,10 +5,10 @@
 package com.mycompany.worldofecn;
 
 /**
- *
+ * Decrive un objet dans le jeu
  * @author Clara et Larissa
  */
-public abstract class Objet {
+public abstract class Objet extends ElementDeJeu {
     private Point2D pos;
     private World monde;
    
