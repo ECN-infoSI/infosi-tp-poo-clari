@@ -9,25 +9,20 @@ package com.mycompany.worldofecn;
  * @author Clara et Larissa
  */
 public abstract class Objet extends ElementDeJeu {
-    private Point2D pos;
-    private World monde;
-   
     /**
      *
      * @param pos Position de l'objet dans le monde 
      * @param monde Carte de tous les personnages et objets du jeu
      */
     public Objet(Point2D pos, World monde) {
-        this.pos = pos;
-        this.monde = monde;
+        super(pos, monde);
     }
     
     /**
      * Constructeur par défaut 
      */
     public Objet() {
-        this.pos = null;
-        this.monde = null;
+        super();
     }
     
     /**
@@ -35,58 +30,22 @@ public abstract class Objet extends ElementDeJeu {
      * @param o
      */
     public Objet(Objet o) {
-        this.pos = new Point2D(o.getPos());
-        this.monde = o.getMonde();
+        super(o);
     }
     
-    /**
-     *
-     * @return monde
-     */
-    public World getMonde() {
-        return monde;
-    }
-
-    /**
-     *
-     * @param monde
-     */
-    public void setMonde(World monde) {
-        this.monde = monde;
-    }
-
-    /**
-     *
-     * @return pos
-     */
-    public Point2D getPos() {
-        return pos;
-    }
-
-    /**
-     *
-     * @param pos
-     */
-    public void setPos(Point2D pos) {
-        if ((this.getMonde() != null) && (this.pos != null)) {
-            this.monde.getMonde()[this.pos.getX()][this.pos.getY()] = '0';
-            this.getMonde().getObjetMap()[this.getPos().getX()][this.getPos().getY()] = null;
-        }
-        this.pos = pos;
-    }
-
     /**
      * Efface l'objet de la carte du monde
      */
     public void disparaitre() {
-        this.monde.getObjetMap()[pos.getX()][pos.getY()] = null;
+        super.getMonde().getObjetMap()[getPos().getX()][getPos().getY()] = null;
     }
     
     @Override
     public String toString() {
-        return "Objet{" + "pos=" + pos + ", monde=" + monde + '}';
+        return "Objet {" + super.toString();
     }
     
+    @Override
     public void affiche(){
         System.out.println(this.toString());
     }

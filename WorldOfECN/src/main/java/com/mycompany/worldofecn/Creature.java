@@ -16,8 +16,6 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
     private int ptPar;
     private int pageAtt;
     private int pagePar;
-    private Point2D pos;
-    private World monde;
     
     //Constructeurs
 
@@ -145,42 +143,6 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
     }
 
     /**
-     *
-     * @return
-     */
-    public Point2D getPos() {
-        return pos;
-    }
-
-    /**
-     *
-     * @param pos
-     */
-    public void setPos(Point2D pos) {
-        if (this.pos != null) {
-            monde.monde[this.pos.getX()][this.pos.getY()]= '0';
-            this.monde.getCreatures()[this.pos.getX()][this.pos.getY()] = null;  } 
-        this.pos = pos;
-        this.monde.getCreatures()[this.pos.getX()][this.pos.getY()] = this;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public World getMonde() {
-        return monde;
-    }
-
-    /**
-     *
-     * @param monde
-     */
-    public void setMonde(World monde) {
-        this.monde = monde;
-    }
-    
-    /**
      * Deplace une creature dans le monde
      * 
      */
@@ -196,9 +158,9 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
         while (bouge == false) {
             dx = randomise.nextInt(3) - 1;
             dy = randomise.nextInt(3)- 1;
-            bouge = (pos.translate(dx, dy, 0) != null) && this.monde.getCreatures(pos.translate(dx, dy, 0)) == null;    
+            bouge = (pos.translate(dx, dy, 0) != null) && this.monde.getCreatures(pos.translate(dx, dy, 0)) == null; //si creature hors le monde et il n'y a pas de creature dans la case on bouge   
         }
-        this.setPos(pos.translate(dx, dy, 0));
+        this.setPos(pos.translate(dx, dy, 0)); //seta uma nova posicao
         this.monde.getCreatures()[this.pos.getX()][this.pos.getY()] = this;
     }
     
@@ -208,12 +170,13 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
      */
     @Override
     public String toString() {
-        return "Creature{" + "ptVie=" + ptVie + ", degAtt=" + degAtt + ", ptPar=" + ptPar + ", pageAtt=" + pageAtt + ", pagePar=" + pagePar + ", pos=" + pos + ", monde=" + monde + '}';
+        return "Creature{" + "ptVie=" + ptVie + ", degAtt=" + degAtt + ", ptPar=" + ptPar + ", pageAtt=" + pageAtt + ", pagePar=" + pagePar + '}' + super.toString();
     }
     
     /**
      * Affiche les attributs de la creature à l'écran
      */
+    @Override
     public void affiche(){
         System.out.println(this.toString());
     }
