@@ -232,7 +232,6 @@ public class World {
             m.deplace();
         }
         
-        
         //Deplace tous les personnages
         Iterator<Personnage> itPersonnage = personnages.iterator();
         while (itPersonnage.hasNext()) {
@@ -250,6 +249,8 @@ public class World {
             }
         }
         
+        //Afficher la carte du monde apres les changements
+        this.afficheWorld();
     }
     
     /**
@@ -296,6 +297,10 @@ public class World {
 
     public Creature getCreatures(Point2D p) {
         return creatures[p.getX()][p.getY()];
+    }
+    
+    public Creature getCreatures(int x, int y) {
+        return creatures[x][y];
     }
     /**
      *

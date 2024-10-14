@@ -10,7 +10,7 @@ import java.util.Random;
  *
  * @author Clara et Larissa
  */
-public class Guerrier extends Personnage {
+public class Guerrier extends Personnage implements Combattant {
 
     /**
      *

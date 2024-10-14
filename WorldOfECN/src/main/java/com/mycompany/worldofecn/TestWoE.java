@@ -19,9 +19,20 @@ public class TestWoE {
      * @param args
      */
     public static void main(String[] args) {
+        int nbArcher , nbPaysan , nbGuerrier , nbLapin, nbLoup , nbEpee, nbPotion;
+        
+        /**Essai d'un jeu**/
+        
+        //Creation d'un monde
         World monMonde = new World();
         
-        int nbArcher , nbPaysan , nbGuerrier , nbLapin, nbLoup , nbEpee, nbPotion;
+        Joueur moi = new Joueur();
+        moi.choixPersonnage();
+        
+        monMonde.tourDeJeu();
+        moi.choixTourDeJeu();
+        
+        //tourDeJeu: deplacer tous les personnages, demander a l'humain ce qu'il veut faire, executer l'action, fin
         
         
         //Illustrez le bon fonctionnement de votre solution en créant un nombre tiré

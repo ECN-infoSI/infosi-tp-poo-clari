@@ -8,18 +8,21 @@ package com.mycompany.worldofecn;
  *
  * @author Clara
  */
-public class PotionSoin extends Objet {
+public class PotionSoin extends Objet implements Utilisable{
     private int force;
+    private int duree;
 
     /**
      *
      * @param p Position de la potion
      * @param m 
      * @param force Force que la potion rend au personnage qui la bois
+     * @param duree Duree de l'effet sur le joueur une fois activé
      */
-    public PotionSoin (Point2D p, World m, int force) {
+    public PotionSoin (Point2D p, World m, int force, int duree) {
         super(p, m);
         this.force = force;
+        this.duree = duree;
     }
     
     /**
@@ -29,6 +32,7 @@ public class PotionSoin extends Objet {
     public PotionSoin (PotionSoin p) {
         super(p);
         this.force = p.getForce();
+        this.duree = p.getDuree();
     }
     
     /**
@@ -37,15 +41,15 @@ public class PotionSoin extends Objet {
     public PotionSoin () {
         super();
         this.force = 0;
+        this.duree = 0;
     }
     
-    /**
-     *
-     */
-    public void PotionSoin () {
-        this.force = 0;
-    }
     
+    @Override
+    public void MiseAJourDuree(){
+        duree = duree - 1;
+    }
+        
     /**
      *
      * @return
@@ -74,16 +78,29 @@ public class PotionSoin extends Objet {
             this.getMonde().getObjetMap()[this.getPos().getX()][this.getPos().getY()] = this;
         }
     }
-    
-    @Override
-    public String toString() {
-        return super.toString() + "PotionSoin{" + "force=" + force + '}';
+
+    public int getDuree() {
+        return duree;
     }
 
+    public void setDuree(int duree) {
+        this.duree = duree;
+    }
+
+    @Override
+    public String toString() {
+        return "PotionSoin{" + "force=" + force + ", duree=" + duree + '}';
+    }
+    
     
     @Override
     public void affiche() {
         System.out.println(this.toString());
+    }
+    
+    @Override
+    public String returnString(){
+        return this.toString();
     }
 
 }

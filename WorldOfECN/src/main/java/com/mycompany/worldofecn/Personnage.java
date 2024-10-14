@@ -101,29 +101,11 @@ public abstract class Personnage extends Creature{
     }
     
     /**
-     * Fonction qui verifie s'il y a une potion, et que traite le cas s'il y en a une.
-     * Dans le cas où il y en a, le personnage bois la potion,
-     * la force de la potion est sommé à ses points de vie et après la potion disparait. 
-     * Une message est affiché.
-     */
-    public void boireSoin() {
-        if (this.getMonde() != null) {
-            if (this.getMonde().getObjetMap()[this.getPos().getX()][this.getPos().getY()] instanceof PotionSoin) {
-                PotionSoin p = (PotionSoin)this.getMonde().getObjetMap()[this.getPos().getX()][this.getPos().getY()];
-                this.setPtVie(this.getPtVie()+p.getForce());
-                p.disparaitre();
-                System.out.println("!!!!Le personnage a bu la potion!!!!!");
-            }
-        }
-    }
-
-    /**
      * Déplace un personnage dans le monde
      */
     @Override
     public void deplace() {
         super.deplace();
-        boireSoin();
     }
     
     /**
@@ -133,6 +115,5 @@ public abstract class Personnage extends Creature{
     @Override 
     public void setPos(Point2D pos) {
         super.setPos(pos);
-        boireSoin();
     }
 }

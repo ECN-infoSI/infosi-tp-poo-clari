@@ -8,7 +8,7 @@ package com.mycompany.worldofecn;
  * Decrive un objet dans le jeu
  * @author Clara et Larissa
  */
-public abstract class Objet extends ElementDeJeu {
+public abstract class Objet extends ElementDeJeu{
     /**
      *
      * @param pos Position de l'objet dans le monde 
