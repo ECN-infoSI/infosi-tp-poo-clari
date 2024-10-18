@@ -36,25 +36,6 @@ public class Guerrier extends Personnage implements Combattant {
         this(g.getNom(), g.getPtVie(), g.getDegAtt(), g.getPtPar(), g.getPageAtt(), g.getPagePar(), g.getDistAttMax(), new Point2D(g.getPos()), g.getMonde());
     }
     
-    /**
-     *
-     * @param pos
-     */
-    @Override
-    public void setPos(Point2D pos) {
-        super.setPos(pos);
-        if (this.getMonde() != null) {
-            this.getMonde().monde[pos.getX()][pos.getY()]= 'G';}
-    }
-    
-    /**
-     *
-     */
-    @Override
-    public void deplace() {
-        super.deplace();
-        this.getMonde().monde[this.getPos().getX()][this.getPos().getY()]= 'G';
-    }
     
     /**
      *

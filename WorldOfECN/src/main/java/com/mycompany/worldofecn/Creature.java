@@ -153,7 +153,6 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
         int dx = 0;
         int dy = 0;
         boolean bouge = false;
-        super.getMonde().monde[pos.getX()][pos.getY()]= '0';
         super.getMonde().getCreatures()[pos.getX()][pos.getY()] = null;
         
         while (bouge == false) {

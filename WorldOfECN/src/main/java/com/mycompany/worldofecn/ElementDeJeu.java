@@ -43,7 +43,6 @@ public abstract class ElementDeJeu {
      */
     public void setPos(Point2D pos) {
         if ((this.getMonde() != null) && (this.pos != null)) {
-            this.monde.getMonde()[this.pos.getX()][this.pos.getY()] = '0';
             this.getMonde().getObjetMap()[this.getPos().getX()][this.getPos().getY()] = null;
         }
         this.pos = pos;

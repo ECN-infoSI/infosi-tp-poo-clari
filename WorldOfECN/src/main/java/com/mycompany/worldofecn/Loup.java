@@ -45,25 +45,7 @@ public class Loup extends Monstre implements Combattant {
         super();
     }
     
-    /**
-     * Deplace le loup dans le monde et mets un 'W' dans sa place pour l'affichage de la carte du monde
-     */
-    @Override
-    public void deplace() {
-        super.deplace();
-        this.getMonde().monde[this.getPos().getX()][this.getPos().getY()]= 'W';
-    }
-    
-    /**
-     *
-     * @param pos
-     */
-    @Override
-    public void setPos(Point2D pos) {
-        super.setPos(pos);
-        if (this.getMonde() != null)
-            this.getMonde().monde[pos.getX()][pos.getY()]= 'W';
-    }
+   
     
     //Autres methodes
 

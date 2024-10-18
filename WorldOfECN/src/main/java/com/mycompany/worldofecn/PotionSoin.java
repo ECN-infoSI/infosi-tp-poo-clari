@@ -74,7 +74,6 @@ public class PotionSoin extends Objet implements Utilisable{
     public void setPos(Point2D pos) {
         super.setPos(pos);
         if (this.getMonde() != null) {
-            this.getMonde().getMonde()[this.getPos().getX()][this.getPos().getY()] = 'X';
             this.getMonde().getObjetMap()[this.getPos().getX()][this.getPos().getY()] = this;
         }
     }

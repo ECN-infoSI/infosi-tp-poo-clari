@@ -69,7 +69,6 @@ public class NuageToxique extends Objet implements Deplacable, Combattant {
         boolean bouge = false;
         
         //effacer la derniere position du nuage
-        super.getMonde().monde[pos.getX()][pos.getY()]= '0';
         super.getMonde().getObjetMap()[pos.getX()][pos.getY()] = null;
         
         //Bouge s'il la position est dans la taille du monde et il n'y a pas d'objet dans la case
@@ -85,11 +84,7 @@ public class NuageToxique extends Objet implements Deplacable, Combattant {
         this.setPos(pos.translate(dx, dy, 0)); 
         super.getMonde().getObjetMap()[super.getPos().getX()][super.getPos().getY()] = this;
         
-        //met un N s'il n'y a pas de creature dans la case:
-        if(super.getMonde().monde[pos.getX()][pos.getY()] == '0'){
-            super.getMonde().monde[pos.getX()][pos.getY()]= 'N';
-        }
-  
+        
         //S'il y a une creature combattant dans la case, on la combat
         Creature c = super.getMonde().getCreatures(super.getPos());
         if( c != null && c instanceof Combattant){

@@ -31,23 +31,26 @@ public class Joueur{
     public void choixPersonnage(){
         int choix = 0;
         String nom;
+        
         Scanner keyboard = new Scanner(System.in);
 
-        while(choix != 1 || choix != 2) {
+        while(choix != 1 && choix != 2) {
         System.out.println("Inserez le numéro du personnage que vous voulez jouer avec: ");
         System.out.println("1. Guerrier");
         System.out.println("2. Archer");
 
         choix = keyboard.nextInt();
 
-            if(choix != 1 || choix != 2){
+            if(choix != 1 && choix != 2){
             System.out.println("Svp selectionnez une option valide.");
             }
         }
         
+        keyboard.nextLine(); // lire le \n après le choix de personnage
+
         System.out.println("Inserez le nom de votre personnage: ");
         nom = keyboard.nextLine();
-        
+                
         Random generateurAleatoire = new Random();
 
         int ptVie = 50 + generateurAleatoire.nextInt(50);
@@ -88,7 +91,7 @@ public class Joueur{
         miseAJourEffets();
         afficheInventaireEffets(2);
 
-        while(choix != 1 || choix != 2) {
+        while(choix != 1 && choix != 2) {
             
             System.out.println("Choississez l'option souhaitee: ");
             System.out.println("1. Se deplacer");
@@ -97,7 +100,7 @@ public class Joueur{
 
             choix = keyboard.nextInt();
 
-            if(choix != 1 || choix != 2 || choix != 3){
+            if(choix != 1 && choix != 2 && choix != 3){
                 System.out.println("Svp selectionnez une option valide.");
             }
         }
@@ -135,6 +138,13 @@ public class Joueur{
                 
             default:
                 break;
+        }
+        monde.afficheWorld();
+        
+        if (perso.getPtVie() > 0) {
+            monde.tourDeJeu();
+        } else {
+            System.out.println("YOU'RE DEAD ! Merci pour avoir jouer :)");
         }
     }
     
@@ -204,17 +214,12 @@ public class Joueur{
             }
         }
         
-        //efface son ancienne position
-        perso.getMonde().monde[pos.getX()][pos.getY()] = '0';
-        
+              
         //efface de la positions dans la matrice de creatures
         perso.getMonde().getCreatures()[pos.getX()][pos.getY()] = null;
         
         //deplace le perso
         perso.setPos(pos.translate(dx, dy, 0));
-        
-        //met un * dans la carte
-        perso.getMonde().monde[pos.getX()][pos.getY()] = '*'; 
         
         //ajout le personnage dans la nouvelle position dans la matrice
         perso.getMonde().getCreatures()[pos.getX()][pos.getY()] = (Creature)perso;

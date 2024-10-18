@@ -51,26 +51,7 @@ public class Archer extends Personnage implements Combattant {
     public int getNbFleches() {
         return nbFleches;
     }
-    
-    /**
-     *
-     * @param pos
-     */
-    @Override
-    public void setPos(Point2D pos) {
-        super.setPos(pos);
-        this.getMonde().monde[pos.getX()][pos.getY()]= 'A';
-    }
 
-    /**
-     * Deplace l'archer dans le monde et mets un 'A' dans sa position à la carte du monde
-     */
-    @Override
-    public void deplace() {
-        super.deplace();
-        this.getMonde().monde[this.getPos().getX()][this.getPos().getY()]= 'A';
-    }
-    
     /**
      *
      * @param nbFleches

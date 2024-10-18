@@ -17,7 +17,6 @@ public class World {
     /**
      * Carte utilisée pour l'affichage à l'utilisateur
      */
-    public char[][] monde;
 
     /**
      * Carte des objets du jeu
@@ -29,6 +28,7 @@ public class World {
      */
     public Creature[][] creatures;
 
+    
     /**
      * Liste de tous les personnages du jeu - humanoides seulement
      */
@@ -45,6 +45,11 @@ public class World {
     public ArrayList<Objet> objets;
     
     /**
+     * Le joueur
+     */
+    public Joueur joueur;
+   
+    /**
      * Taille du monde carré
      */
     public  static  final  int taille =  50; 
@@ -55,7 +60,6 @@ public class World {
      *
      */
     public World(){
-        monde = new char [taille][taille];
         objetMap = new Objet[taille][taille];
         creatures = new Creature[taille][taille];
         
@@ -78,7 +82,7 @@ public class World {
         do{
             entierAleaX = generateurAleatoire.nextInt(taille);
             entierAleaY = generateurAleatoire.nextInt(taille);
-        }while(monde[entierAleaX][entierAleaY] != '0');
+        }while(creatures[entierAleaX][entierAleaY] != null);
         
         Point2D position = new Point2D();
         position.setX(entierAleaX);
@@ -90,18 +94,7 @@ public class World {
         c.setPos(position);
         c.setPtVie(AleaPtVie);
         this.setCreatures(c);
-        
-        if (c instanceof Archer) {
-            monde[entierAleaX][entierAleaY] = 'A';
-        } else if (c instanceof Paysan) {
-            monde[entierAleaX][entierAleaY] = 'P';
-        } else if (c instanceof Lapin) {
-            monde[entierAleaX][entierAleaY] = 'L';
-        } else if (c instanceof Guerrier) {
-            monde[entierAleaX][entierAleaY] = 'G';
-        } else if (c instanceof Loup) {
-            monde[entierAleaX][entierAleaY] = 'W';
-        }
+
             
     }
     
@@ -117,7 +110,7 @@ public class World {
         do{
             entierAleaX = generateurAleatoire.nextInt(taille);
             entierAleaY = generateurAleatoire.nextInt(taille);
-        }while(monde[entierAleaX][entierAleaY] != '0');
+        }while(creatures[entierAleaX][entierAleaY] != null || objetMap[entierAleaX][entierAleaY] != null);
         
         Point2D position = new Point2D();
         position.setX(entierAleaX);
@@ -126,12 +119,7 @@ public class World {
         o.setMonde(this);
         o.setPos(position);
         this.setObjetMap(o, entierAleaX, entierAleaY);
-        
-        if (o instanceof PotionSoin) {
-            monde[entierAleaX][entierAleaY] = 'X';            
-        } else if (o instanceof Epee) {
-            monde[entierAleaX][entierAleaY] = 'E';
-        }             
+                  
     }
     
     /**
@@ -155,14 +143,7 @@ public class World {
      * @param nbPotion nombre de Potions dans le jeu
      */
     public void creerMondeAlea(int nbArcher, int nbPaysan, int nbGuerrier, int nbLapin, int nbLoup, int nbEpee, int nbPotion){
-        
-        //Creer la matrix vide
-        for(int i = 0; i<taille; i++){
-            for (int j = 0 ; j<taille; j++){
-                monde[i][j] = '0';
-            }
-        }
-        
+                
         //Creer les objets du type personnage et les placer dans le array
         for(int i = 0; i < nbArcher; i++){
             Archer nouvelArcher = new Archer();
@@ -216,9 +197,7 @@ public class World {
      *
      * @return
      */
-    public char[][] getMonde() {
-        return monde;
-    }
+    
 
     /**
      * Gère le tour de jeu: mise à jour de tous les positions de tous les creatures et objets.
@@ -251,12 +230,62 @@ public class World {
         
         //Afficher la carte du monde apres les changements
         this.afficheWorld();
+        this.joueur.choixTourDeJeu();
     }
     
     /**
      * Affiche à l'écran la carte du jeu pour l'utilisateur, avec la position des objets, personnages et monstres
      */
-    public void afficheWorld() {
+    public void afficheWorld() { //completar com instancia de cada perso
+        
+        char[][] monde = new char[taille][taille];
+
+        for(int i = 0; i<taille; i++){
+            for (int j = 0 ; j<taille; j++){
+                monde[i][j] = '-';
+            }
+        }
+        
+        for (Objet item : this.getObjets()) {
+            if (item instanceof Nourriture) {
+                monde[item.getPos().getX()][item.getPos().getY()] = 'o';
+            }
+            else if (item instanceof Epee) {
+                monde[item.getPos().getX()][item.getPos().getY()] = 'E';
+            }
+            else if (item instanceof NuageToxique) {
+                monde[item.getPos().getX()][item.getPos().getY()] = 'X';
+            }
+            else if (item instanceof PotionSoin) {
+                monde[item.getPos().getX()][item.getPos().getY()] = 'S';
+            }
+        } 
+        
+        for (Creature item : this.getPersonnages()) {
+            if (item instanceof Archer) {
+                monde[item.getPos().getX()][item.getPos().getY()] = 'A';
+            }
+            else if (item instanceof Guerrier) {
+                monde[item.getPos().getX()][item.getPos().getY()] = 'G';
+            }
+            else if (item instanceof Paysan) {
+                monde[item.getPos().getX()][item.getPos().getY()] = 'P';
+            }
+        }  
+        
+        for (Creature item : this.getMonstres()) {
+            if (item instanceof Lapin) {
+                monde[item.getPos().getX()][item.getPos().getY()] = 'L';
+            }
+            else if (item instanceof Loup) {
+                monde[item.getPos().getX()][item.getPos().getY()] = 'W';
+            }
+        } 
+        
+        // le joueur est representée par un J
+        monde[joueur.getPerso().getPos().getX()][joueur.getPerso().getPos().getX()] = 'J';
+        
+        //affiche le matrice avec les objets et creatures
         for(int i = 0; i<taille; i++){
             for (int j = 0 ; j<taille; j++){
                 System.out.print(monde[i][j] + " ");
@@ -385,6 +414,12 @@ public class World {
         }
     }
     
-    
+    public Joueur getJoueur() {
+        return joueur;
+    }
+
+    public void setJoueur(Joueur joueur) {
+        this.joueur = joueur;
+    }
 }
     
