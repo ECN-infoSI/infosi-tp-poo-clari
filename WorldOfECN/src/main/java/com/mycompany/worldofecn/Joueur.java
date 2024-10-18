@@ -6,6 +6,7 @@ package com.mycompany.worldofecn;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.Random;
 
 /**
  *  Implements la classe du joueur humain
@@ -15,11 +16,13 @@ public class Joueur{
     private Personnage perso;
     private ArrayList<Utilisable> effets;
     private ArrayList<Utilisable> inventaire;
-
-    public Joueur() {
+    private World monde;
+    
+    public Joueur(World monde) {
         this.perso = null;
         effets = new ArrayList<>();
         inventaire = new ArrayList<>();
+        this.monde = monde;
     }
     
     /**
@@ -45,15 +48,33 @@ public class Joueur{
         System.out.println("Inserez le nom de votre personnage: ");
         nom = keyboard.nextLine();
         
-        if (choix == 1){
-            perso = new Guerrier();
-        } else{
-            perso = new Archer();
-            
+        Random generateurAleatoire = new Random();
+
+        int ptVie = 50 + generateurAleatoire.nextInt(50);
+        int degAtt;
+        int ptPar;
+        int pageAtt;
+        int pagePar;
+        int dMax;
+        Point2D p = new Point2D();
+        
+        if (choix == 1){ // création des characteristiques d'un guerrier
+            degAtt = 50 + generateurAleatoire.nextInt(50);
+            ptPar = 40 + generateurAleatoire.nextInt(60);
+            pageAtt = 30 + generateurAleatoire.nextInt(70);
+            pagePar = 40 + generateurAleatoire.nextInt(60);
+            dMax = 1 + generateurAleatoire.nextInt(5);
+            perso = new Guerrier(nom, ptVie, degAtt, ptPar, pageAtt, pagePar, dMax, p, this.monde);
+        } else{ // création des characteristiques d'un archer
+            degAtt = 25 + generateurAleatoire.nextInt(65);
+            ptPar = 30 + generateurAleatoire.nextInt(70);
+            pageAtt = 50 + generateurAleatoire.nextInt(50);
+            pagePar = 30 + generateurAleatoire.nextInt(70);
+            dMax = 5 + generateurAleatoire.nextInt(5);
+            int nbFleches = 3 + generateurAleatoire.nextInt(7);
+            perso = new Archer(nom, ptVie, degAtt, ptPar, pageAtt, pagePar, dMax, p, nbFleches, this.monde);           
         }
-        
-        perso.setNom(nom);
-        
+             
     }
     
     
@@ -65,7 +86,7 @@ public class Joueur{
         Scanner keyboard = new Scanner(System.in);
         
         miseAJourEffets();
-        afficheEffets();
+        afficheInventaireEffets(2);
 
         while(choix != 1 || choix != 2) {
             
@@ -99,7 +120,7 @@ public class Joueur{
             
             case 3:
                 System.out.println("Choississez l'effet a activer: ");
-                afficheInventaire();
+                afficheInventaireEffets(1);
                 
                 int choixInv = keyboard.nextInt();
                         
@@ -270,20 +291,8 @@ public class Joueur{
     public void ajoutEffet(Utilisable u){
         effets.add(u);
         
-        Iterator<Utilisable> itEffets = effets.iterator();
-        int index = 0;
-        
-        while (itEffets.hasNext()) {
-            Utilisable outil = itEffets.next();
-            outil.MiseAJourDuree();
-         
-            if(outil.getDuree() == 0){
-                effets.remove(index);
-            }
-            
-            index++;
-        }
-        
+        this.miseAJourEffets();
+               
         System.out.println("Objet ajoute´, inventaire mis a jour.");
     }
     
@@ -304,10 +313,15 @@ public class Joueur{
     }
     
     /**
-     * Affiche l'inventaire à l'écran.
+     * Affiche l'inventaire ou les effets actifs du joueur à l'écran.
      */
-    public void afficheInventaire(){
-        Iterator<Utilisable> itOutils = inventaire.iterator();
+    public void afficheInventaireEffets(int option){
+        Iterator<Utilisable> itOutils;
+        if (option == 1) {
+            itOutils = inventaire.iterator();
+        } else {
+            itOutils = effets.iterator();
+        }
         int index = 0;
         
         while (itOutils.hasNext()) {
@@ -317,27 +331,12 @@ public class Joueur{
             index++;
         }
     }
-    
-    /**
-     * Affiche les effets actifs du joueur à l'écran.
-     */
-    public void afficheEffets(){
-        Iterator<Utilisable> itOutils = effets.iterator();
-        int index = 0;
-        
-        while (itOutils.hasNext()) {
-            Utilisable outils = itOutils.next();
-            
-            System.out.print(index + outils.returnString());
-            index++;
-        }
-    }
+   
     
     /**
      * Implements le choix des Combattants pour que le joueur combatte; Affiche tous les creatures dans un rayon de distAttMax et combat la creature que le joueur choisis.
      */
     public void choixCombattants(){
-        int dist = perso.getDistAttMax();
         int x = perso.getPos().getX();
         int y = perso.getPos().getY();
         ArrayList<Creature> creat = new ArrayList<>(); //stocker les creatures qui le joueur peut combattre
@@ -345,48 +344,32 @@ public class Joueur{
         //Ici, on: 
         //- stocke dans un ArrayList tous les creatures que le joueur peut combattre
         //- affiche au joueur tous ses possibles combattants
-        for (int i = 0 ; i <= dist; i++){
-            //verifier si on ne sort pas des limites du monde
-            //creatures au nord
-            if( y+i <= perso.getMonde().taille ){
-                if(perso.getMonde().getCreatures(x,y+i) instanceof Combattant){
-                    System.out.println(i + perso.getMonde().getCreatures(x,y+i).toString());
-                    creat.add(perso.getMonde().getCreatures(x,y+i));
+        for (Monstre item : this.monde.getMonstres()) {
+            if (item instanceof Combattant) {
+                float dist = this.perso.getPos().distance(item.getPos());
+                if (dist <= perso.getDistAttMax()) {
+                    creat.add(item);
                 }
             }
-            //creatures a l'ouest
-            if( x-i <= perso.getMonde().taille ){
-                if(perso.getMonde().getCreatures(x-i,y) instanceof Combattant){
-                    System.out.println(i + perso.getMonde().getCreatures(x-i,y).toString());
-                    creat.add(perso.getMonde().getCreatures(x-i,y));
+        }
+        for (Creature item : this.monde.getPersonnages()) {
+            if (item instanceof Combattant) {
+                float dist = this.perso.getPos().distance(item.getPos());
+                if (dist <= perso.getDistAttMax()) {
+                    creat.add(item);
                 }
             }
-            //creatures a l'est
-            if( x+i <= perso.getMonde().taille ){
-                if(perso.getMonde().getCreatures(x+i,y) instanceof Combattant){
-                    System.out.println(i + perso.getMonde().getCreatures(x+i,y).toString()); 
-                    creat.add(perso.getMonde().getCreatures(x+i,y));
-                }
-            }
-            //creatures au sud
-            if( y-i <= perso.getMonde().taille ){
-                if(perso.getMonde().getCreatures(x,y-i) instanceof Combattant){
-                    System.out.println(i + perso.getMonde().getCreatures(x,y-i).toString()); 
-                    creat.add(perso.getMonde().getCreatures(x,y-i));
-                }
-            }
+        }  
+                
+        //Ici, on attend le choix du joueur et appelle la fonction combattre
+        Scanner keyboard = new Scanner(System.in);
+        int choixCombat = keyboard.nextInt();
+
+        while(choixCombat > creat.size() || choixCombat <= 0) {
+            System.out.println("Svp selectionnez une option valide.");
+            choixCombat = keyboard.nextInt();
+        }
+
+        ((Combattant)perso).combattre(creat.get(choixCombat));
     }
-        
-    //Ici, on attend le choix du joueur et appelle la fonction combattre
-    Scanner keyboard = new Scanner(System.in);
-    int choixCombat = keyboard.nextInt();
-       
-    while(choixCombat > creat.size() || choixCombat <= 0) {
-        System.out.println("Svp selectionnez une option valide.");
-        choixCombat = keyboard.nextInt();
-    }
-    
-    ((Combattant)perso).combattre(creat.get(choixCombat));
-    
-}
 }

@@ -26,7 +26,7 @@ public class TestWoE {
         //Creation d'un monde
         World monMonde = new World();
         
-        Joueur moi = new Joueur();
+        Joueur moi = new Joueur(monMonde);
         moi.choixPersonnage();
         
         monMonde.tourDeJeu();
