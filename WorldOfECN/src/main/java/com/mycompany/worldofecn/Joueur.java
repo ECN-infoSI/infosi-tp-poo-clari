@@ -185,7 +185,6 @@ public class Joueur{
         }
         System.out.println("Vos attributs: ");
         perso.affiche();
-        monde.afficheWorld();
         
         if (perso.getPtVie() > 0) {
             monde.tourDeJeu();
