@@ -53,6 +53,10 @@ public class World {
      * Taille du monde carré
      */
     public  static  final  int taille =  50; 
+
+    public static int getTaille() {
+        return taille;
+    }
     
     //methodes
 
@@ -283,7 +287,7 @@ public class World {
         } 
         
         // le joueur est representée par un J
-        monde[joueur.getPerso().getPos().getX()][joueur.getPerso().getPos().getX()] = 'J';
+        monde[joueur.getPerso().getPos().getX()][joueur.getPerso().getPos().getY()] = 'J';
         
         //affiche le matrice avec les objets et creatures
         for(int i = 0; i<taille; i++){

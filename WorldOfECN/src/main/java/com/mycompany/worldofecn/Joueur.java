@@ -258,6 +258,7 @@ public class Joueur{
             } else{ //Sinon, le joueur a mal ecrit son choix
               System.out.println("Svp selectionnez une option valide.");
               choix = keyboard.nextLine();
+              bienEcrit = "D".equals(choix) || "Q".equals(choix) || "Z".equals(choix) || "S".equals(choix);
             }
         }
         
