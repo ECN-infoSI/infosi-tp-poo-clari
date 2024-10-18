@@ -24,7 +24,7 @@ public class Archer extends Personnage implements Combattant {
      */
     public Archer(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p, int nbFleches, World monde){
        super(n, pV, dA, pPar, paAtt, paPar, dMax, p, monde) ;
-       this.nbFleches = 0;
+       this.nbFleches = nbFleches;
     }
 
     /**
@@ -94,6 +94,7 @@ public class Archer extends Personnage implements Combattant {
                 
                 if (tirage > c.getPagePar()){ //Defense ratee
                     System.out.println("Defense ratee!");
+                    
                     nouveauPtVie = c.getPtVie() - this.getDegAtt(); 
                 }
                 else{ //Defense reussie
@@ -106,16 +107,10 @@ public class Archer extends Personnage implements Combattant {
                 //ni l'attaquant ni le defenseur subissent des degats
             }
             
-            if(c instanceof Archer){
-                int numFleches;
-                numFleches = ((Archer)c).getNbFleches() - 1;
-                System.out.println("Nombre de fleches defenseur: " + numFleches);
-            }
-  
         }
         
         //Combat a distance
-        else if (distance > 1 && distance < this.getDistAttMax()){
+        else if (distance > 1 && distance < this.getDistAttMax() && nbFleches > 0){
             
             //Attaque reussie
             if(tirage <= this.getPageAtt() ){ 
@@ -127,6 +122,8 @@ public class Archer extends Personnage implements Combattant {
                 System.out.println("Attaque ratee!"); 
                 //ni l'attaquant ni le defenseur subissent des degats
             }    
+            
+            this.nbFleches -= 1;
         }
         
         if (nouveauPtVie > 100) {
@@ -141,11 +138,13 @@ public class Archer extends Personnage implements Combattant {
         }
         
         c.setPtVie(nouveauPtVie);
-        this.nbFleches = this.nbFleches - 1;
+        if (this.nbFleches > 0) {
+            this.nbFleches = this.nbFleches - 1;
+        }
                 
         System.out.println("Points de Vie attaquant: " + this.getPtVie() );
         System.out.println("Points de Vie defenseur: " + c.getPtVie() );
-        System.out.println("Nombre de fleches attaquant: " + (this.nbFleches-1));
+        System.out.println("Nombre de fleches attaquant: " + (this.nbFleches));
         
         if (c.getPtVie() == 0) {
             c = null;
