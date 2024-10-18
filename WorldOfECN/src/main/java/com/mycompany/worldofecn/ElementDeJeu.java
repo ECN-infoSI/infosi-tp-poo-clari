@@ -58,7 +58,7 @@ public abstract class ElementDeJeu {
     
     @Override
     public String toString() {
-        return "ElementDeJeu{" + "pos=" + pos + ", monde=" + monde + '}';
+        return ", pos= (X: " + pos.getX() + ", Y: " + pos.getY() + ")}";
     }
     
     public void affiche(){

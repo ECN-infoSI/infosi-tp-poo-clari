@@ -89,7 +89,11 @@ public abstract class Personnage extends Creature{
      */
     @Override
     public String toString() {
-        return super.toString() + "Personnage{" + "nom=" + nom + ", distAttMax=" + distAttMax + '}';
+        if (this instanceof Archer) {
+            Archer archer = (Archer) this;  // Casting to Archer
+            return archer.getClass().getSimpleName() + " {nom=" + nom + ", nbFleches=" + archer.getNbFleches() + ", distAttMax=" + distAttMax + super.toString();
+        }
+        return  this.getClass().getSimpleName() + " {nom=" + nom + ", distAttMax=" + distAttMax + super.toString();
     }
     
     /**

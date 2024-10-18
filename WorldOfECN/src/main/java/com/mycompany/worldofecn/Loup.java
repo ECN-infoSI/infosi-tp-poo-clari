@@ -101,12 +101,28 @@ public class Loup extends Monstre implements Combattant {
             if(nouveauPtVie > 100){
                 nouveauPtVie = 100;
             }
+            else if(nouveauPtVie < 0){
+                nouveauPtVie = 0;
+            }
+            if (this.getPtVie() > 100) {
+                this.setPtVie(100);
+            }
+            else if (this.getPtVie() < 0) {
+                this.setPtVie(0);
+            }
+            
             c.setPtVie(nouveauPtVie);
             
             System.out.println("Points de Vie attaquant: " + this.getPtVie() );
             System.out.println("Points de Vie defenseur: " + c.getPtVie() );
+            
+            if(c.getPtVie() == 0){
+                c = null;
+            }
+                        
         } else{
             System.out.println("Trop loin pour se combattre.");
         }  
+        
     }
 }

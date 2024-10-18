@@ -170,7 +170,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
      */
     @Override
     public String toString() {
-        return "Creature{" + "ptVie=" + ptVie + ", degAtt=" + degAtt + ", ptPar=" + ptPar + ", pageAtt=" + pageAtt + ", pagePar=" + pagePar + '}' + super.toString();
+        return " ptVie=" + ptVie + ", degAtt=" + degAtt + ", ptPar=" + ptPar + ", pageAtt=" + pageAtt + ", pagePar=" + pagePar + super.toString();
     }
     
     /**
@@ -180,6 +180,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
     public void affiche(){
         System.out.println(this.toString());
     }
+    
     
    
 }

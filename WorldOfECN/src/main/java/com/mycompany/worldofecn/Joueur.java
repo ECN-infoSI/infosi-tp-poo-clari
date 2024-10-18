@@ -77,7 +77,8 @@ public class Joueur{
             int nbFleches = 3 + generateurAleatoire.nextInt(7);
             perso = new Archer(nom, ptVie, degAtt, ptPar, pageAtt, pagePar, dMax, p, nbFleches, this.monde);           
         }
-             
+        System.out.println("Ton personnage est represente par un 'J' sur le tableau :). Voilà ses caracteristiques: ");
+        perso.affiche();
     }
     
     
@@ -110,7 +111,7 @@ public class Joueur{
             case 1:
                 //Le joueur doit pouvoir choisir son deplacement
                 deplace();
-                ramasserObjet();
+                ramasserObjet();                
                 break;
                 
             case 2:
@@ -139,6 +140,8 @@ public class Joueur{
             default:
                 break;
         }
+        System.out.println("Vos attributs: ");
+        perso.affiche();
         monde.afficheWorld();
         
         if (perso.getPtVie() > 0) {
@@ -200,6 +203,8 @@ public class Joueur{
                 
                 //Si bouge est vrai, alors deplace le personnage
                 if (bouge){
+                    perso.setPos(pos.translate(dx, dy, 0)); //seta uma nova posicao
+                    monde.getCreatures()[perso.getPos().getX()][perso.getPos().getY()] = perso;
                    break;
                 } 
                 //Sinon, demander au joueur d'ecrire de nouveau
@@ -365,14 +370,20 @@ public class Joueur{
                 }
             }
         }  
+        
+        for(int i = 0; i < creat.size() ; i++) {
+            System.out.print(i+1 + ": ");
+            creat.get(i).affiche();
+        }
+        
                 
         //Ici, on attend le choix du joueur et appelle la fonction combattre
         Scanner keyboard = new Scanner(System.in);
-        int choixCombat = keyboard.nextInt();
+        int choixCombat = keyboard.nextInt() - 1;
 
-        while(choixCombat > creat.size() || choixCombat <= 0) {
+        while(choixCombat >= creat.size() || choixCombat < 0) {
             System.out.println("Svp selectionnez une option valide.");
-            choixCombat = keyboard.nextInt();
+            choixCombat = keyboard.nextInt() - 1;
         }
 
         ((Combattant)perso).combattre(creat.get(choixCombat));

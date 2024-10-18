@@ -52,6 +52,7 @@ public class Archer extends Personnage implements Combattant {
         return nbFleches;
     }
 
+    
     /**
      *
      * @param nbFleches
@@ -59,6 +60,8 @@ public class Archer extends Personnage implements Combattant {
     public void setNbFleches(int nbFleches) {
         this.nbFleches = nbFleches;
     }
+    
+        
     
     /**
      * Traite le combat corps à corps et à distance entre deux Personnages ou deux creatures.
@@ -126,9 +129,17 @@ public class Archer extends Personnage implements Combattant {
             }    
         }
         
-        if(nouveauPtVie > 100){
+        if (nouveauPtVie > 100) {
             nouveauPtVie = 100;
+        } else if (nouveauPtVie < 0) {
+            nouveauPtVie = 0;
         }
+        if (this.getPtVie() > 100) {
+            this.setPtVie(100);
+        } else if (this.getPtVie() < 0) {
+            this.setPtVie(0);
+        }
+        
         c.setPtVie(nouveauPtVie);
         this.nbFleches = this.nbFleches - 1;
                 
@@ -136,5 +147,8 @@ public class Archer extends Personnage implements Combattant {
         System.out.println("Points de Vie defenseur: " + c.getPtVie() );
         System.out.println("Nombre de fleches attaquant: " + (this.nbFleches-1));
         
+        if (c.getPtVie() == 0) {
+            c = null;
+        }
     }
 }
