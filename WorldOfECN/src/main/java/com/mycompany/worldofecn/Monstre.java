@@ -43,4 +43,7 @@ public abstract class Monstre extends Creature {
         super();
     }
     
+    public String toString() {
+        return this.getClass().getSimpleName() + super.toString();
+    }
 }

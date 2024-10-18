@@ -95,6 +95,9 @@ public class Loup extends Monstre implements Combattant {
             if(c instanceof Archer){
                 int numFleches;
                 numFleches = ((Archer)c).getNbFleches() - 1;
+                if (numFleches < 0) {
+                    numFleches = 0;
+                }
                 System.out.println("Nombre de fleches defenseur: " + numFleches);
             }
             
