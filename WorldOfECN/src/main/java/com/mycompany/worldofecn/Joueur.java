@@ -61,6 +61,9 @@ public class Joueur{
         int dMax;
         Point2D p = new Point2D();
         
+        p.setX(generateurAleatoire.nextInt(monde.getTaille()));
+        p.setY(generateurAleatoire.nextInt(monde.getTaille()));
+        
         if (choix == 1){ // création des characteristiques d'un guerrier
             degAtt = 50 + generateurAleatoire.nextInt(50);
             ptPar = 40 + generateurAleatoire.nextInt(60);
@@ -74,7 +77,7 @@ public class Joueur{
             pageAtt = 50 + generateurAleatoire.nextInt(50);
             pagePar = 30 + generateurAleatoire.nextInt(70);
             dMax = 5 + generateurAleatoire.nextInt(5);
-            int nbFleches = 3 + generateurAleatoire.nextInt(7);
+            int nbFleches = 5 + generateurAleatoire.nextInt(7);
             perso = new Archer(nom, ptVie, degAtt, ptPar, pageAtt, pagePar, dMax, p, nbFleches, this.monde);           
         }
         System.out.println("Ton personnage est represente par un 'J' sur le tableau :). Voilà ses caracteristiques: ");
@@ -87,23 +90,64 @@ public class Joueur{
     */
     public void choixTourDeJeu(){
         int choix = 0;
+        boolean inventairePlein = inventaire.size() > 0;
+        ArrayList<Creature> creat = possiblesCombattants();
+        boolean peutCombattre = creat.size() > 0;
         Scanner keyboard = new Scanner(System.in);
         
         miseAJourEffets();
         afficheInventaireEffets(2);
 
-        while(choix != 1 && choix != 2) {
-            
-            System.out.println("Choississez l'option souhaitee: ");
-            System.out.println("1. Se deplacer");
-            System.out.println("2. Combattre");
-            System.out.println("3. Activer effet");
+        if (peutCombattre && inventairePlein) {
+            while(choix != 1 && choix != 2 && choix != 3) {
 
-            choix = keyboard.nextInt();
+                System.out.println("Choississez l'option souhaitee: ");
+                System.out.println("1. Se deplacer");
+                System.out.println("2. Activer effet");
+                System.out.println("3. Combattre");
+                
+                choix = keyboard.nextInt();
 
-            if(choix != 1 && choix != 2 && choix != 3){
-                System.out.println("Svp selectionnez une option valide.");
+                if(choix != 1 && choix != 2 && choix != 3){
+                    System.out.println("Svp selectionnez une option valide.");
+                }
             }
+        }
+        else if (peutCombattre == false && inventairePlein){
+            while(choix != 1 && choix != 2) {
+
+                System.out.println("Choississez l'option souhaitee: ");
+                System.out.println("1. Se deplacer");
+                System.out.println("2. Activer effet");
+                
+                choix = keyboard.nextInt();
+
+                if(choix != 1 && choix != 2){
+                    System.out.println("Svp selectionnez une option valide.");
+                }
+            }
+        }
+        else if (peutCombattre && inventairePlein == false){
+            while (choix != 1 && choix != 2) {
+
+                System.out.println("Choississez l'option souhaitee: ");
+                System.out.println("1. Se deplacer");
+                System.out.println("2. Combattre");
+
+                choix = keyboard.nextInt();
+
+                if (choix != 1 && choix != 2) {
+                    System.out.println("Svp selectionnez une option valide.");
+                }
+                else if (choix == 2) {
+                    choix = 3;
+                    break;
+                }
+            }
+        }
+        else if (peutCombattre == false && inventairePlein == false){
+            System.out.println("Vous n'avez qui combattre ni des objets dans votre inventaire");
+            choix = 1;
         }
         
         // Deplacer le personnage
@@ -115,14 +159,6 @@ public class Joueur{
                 break;
                 
             case 2:
-                //Combattre un personnage
-                //afficher la liste des personnages a combattre
-                //Afficher tous les monstres les plus proches du joueur
-                System.out.println("Choississez la creature a combattre: ");
-                choixCombattants();
-                break;
-            
-            case 3:
                 System.out.println("Choississez l'effet a activer: ");
                 afficheInventaireEffets(1);
                 
@@ -135,6 +171,13 @@ public class Joueur{
                 }
                 
                 activerEffet(choixInv);
+                break;
+            
+            case 3:
+                //Combattre un personnage
+                //afficher la liste des personnages a combattre
+                //Afficher tous les monstres les plus proches du joueur
+                choixCombattants(creat);
                 break;
                 
             default:
@@ -342,11 +385,10 @@ public class Joueur{
         }
     }
    
-    
     /**
-     * Implements le choix des Combattants pour que le joueur combatte; Affiche tous les creatures dans un rayon de distAttMax et combat la creature que le joueur choisis.
+     * Identifie tous les creatures dans un rayon possible pour combattre
      */
-    public void choixCombattants(){
+    public ArrayList<Creature> possiblesCombattants() {
         int x = perso.getPos().getX();
         int y = perso.getPos().getY();
         ArrayList<Creature> creat = new ArrayList<>(); //stocker les creatures qui le joueur peut combattre
@@ -370,22 +412,38 @@ public class Joueur{
                 }
             }
         }  
+        return creat;
+    }
+    
+    
+    /**
+     * Implements le choix des Combattants pour que le joueur combatte; Affiche tous les creatures dans un rayon de distAttMax et combat la creature que le joueur choisis.
+     */
+    public boolean choixCombattants(ArrayList<Creature> creat){
         
-        for(int i = 0; i < creat.size() ; i++) {
-            System.out.print(i+1 + ": ");
-            creat.get(i).affiche();
-        }
-        
-                
-        //Ici, on attend le choix du joueur et appelle la fonction combattre
-        Scanner keyboard = new Scanner(System.in);
-        int choixCombat = keyboard.nextInt() - 1;
+        System.out.println("Choississez la creature a combattre: ");
+        if (creat.size() > 0) {
+            for(int i = 0; i < creat.size() ; i++) {
+                System.out.print(i+1 + ": ");
+                creat.get(i).affiche();
+            }
 
-        while(choixCombat >= creat.size() || choixCombat < 0) {
-            System.out.println("Svp selectionnez une option valide.");
-            choixCombat = keyboard.nextInt() - 1;
-        }
 
-        ((Combattant)perso).combattre(creat.get(choixCombat));
+            //Ici, on attend le choix du joueur et appelle la fonction combattre
+            Scanner keyboard = new Scanner(System.in);
+            int choixCombat = keyboard.nextInt() - 1;
+
+            while(choixCombat >= creat.size() || choixCombat < 0) {
+                System.out.println("Svp selectionnez une option valide.");
+                choixCombat = keyboard.nextInt() - 1;
+            }
+
+            ((Combattant)perso).combattre(creat.get(choixCombat));
+            return true;
+        }
+        else {
+            System.out.println("Il n'y a personne a combattre :(");
+            return false;
+        }
     }
 }
